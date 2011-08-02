@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>ImageResizer.Plugins.Watermark</name>
+    </assembly>
+    <members>
+        <member name="T:ImageResizer.Plugins.Watermark.WatermarkPlugin">
+            <summary>
+            Provides extensibility points for drawing watermarks and even modifying resizing/image settings
+            </summary>
+        </member>
+        <member name="M:ImageResizer.Plugins.Watermark.WatermarkPlugin.GetMemCachedBitmap(System.String)">
+            <summary>
+            Loads a bitmap, cached using asp.net's cache
+            </summary>
+            <param name="localfile"></param>
+            <returns></returns>
+        </member>
+    </members>
+</doc>

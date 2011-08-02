@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>ImageResizer.Plugins.CloudFront</name>
+    </assembly>
+    <members>
+        <!-- Badly formed XML comment ignored for member "T:ImageResizer.Plugins.CloudFront.CloudFrontPlugin" -->
+    </members>
+</doc>

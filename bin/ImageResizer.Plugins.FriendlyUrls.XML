@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>ImageResizer.Plugins.FriendlyUrls</name>
+    </assembly>
+    <members>
+        <member name="F:ImageResizer.Plugins.FriendlyUrls.FriendlyUrlsPlugin.resizeFolder">
+            <summary>
+            Matches /resize(x,y,f)/ syntax
+            Fixed Bug - will replace both slashes.. make first a lookbehind
+            </summary>
+        </member>
+        <member name="M:ImageResizer.Plugins.FriendlyUrls.FriendlyUrlsPlugin.parseResizeFolderSyntax(System.String,System.Collections.Specialized.NameValueCollection)">
+            <summary>
+            Parses and removes the resize folder syntax "resize(x,y,f)/" from the specified file path. 
+            Places settings into the referenced querystring
+            </summary>
+            <param name="path"></param>
+            <param name="query">The collection to place parsed values into</param>
+            <returns></returns>
+        </member>
+    </members>
+</doc>
