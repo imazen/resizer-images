@@ -4,5 +4,34 @@
         <name>ImageResizer.Plugins.SeamCarving</name>
     </assembly>
     <members>
+        <member name="F:ImageResizer.Plugins.SeamCarving.CairManager._concurrentExecutions">
+            <summary>
+            Number of executing CAIR.exe processes
+            </summary>
+        </member>
+        <member name="F:ImageResizer.Plugins.SeamCarving.CairManager._concurrentWaitingThreads">
+            <summary>
+            Number of threads waiting for a CAIR.exe process.
+            </summary>
+        </member>
+        <member name="F:ImageResizer.Plugins.SeamCarving.CairManager.turnstile">
+            <summary>
+            Used for efficient thread waiting
+            </summary>
+        </member>
+        <member name="P:ImageResizer.Plugins.SeamCarving.CairManager.MaxConcurrentExecutions">
+            <summary>
+            The maximum number of CAIR.exe instances to allow at the same time. After this limit is reached, 
+            requests will wait until requests will MaxConcurrentWaitingThreads is reached, at which point 
+            requests will be denied so the thread pool doesn't become exhausted.
+            Set this value to at least CPU cores * 2, as the proccess is also I/O bound. Set to 0 for no limit (default).
+            </summary>
+        </member>
+        <member name="P:ImageResizer.Plugins.SeamCarving.CairManager.MaxConcurrentWaitingThreads">
+            <summary>
+            The maximum number of waiting threads (for a CAIR.exe instance) to permit before denying requests. Set to 0 (default) to permit an endless number of threads to wait (although request timeout will still be effect).
+            Set this value to at least 30 
+            </summary>
+        </member>
     </members>
 </doc>

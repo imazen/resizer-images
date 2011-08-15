@@ -62,6 +62,8 @@
             Stream, or a physical path
             </summary>
             <param name="source"></param>
+            <param name="path"></param>
+            <param name="disposeSource"></param>
             <param name="settings"></param>
         </member>
         <member name="M:ImageResizer.Resizing.AbstractImageProcessor.DecodeStreamFailed(System.IO.Stream,ImageResizer.ResizeSettings,System.String)">
@@ -458,7 +460,7 @@
             Selects a caching system for the specified request and response
             </summary>
             <param name="context"></param>
-            <param name="args"></param>
+            <param name="responseArgs"></param>
             <returns></returns>
         </member>
         <member name="T:ImageResizer.Caching.ResponseArgs">
@@ -594,6 +596,7 @@
             <summary>
             Encodes the image to the specified stream 
             </summary>
+            <param name="i"></param>
             <param name="s"></param>
         </member>
         <member name="P:ImageResizer.Encoding.IEncoder.SupportsTransparency">
@@ -644,7 +647,7 @@
             If an unsupported format is specified, it is returned.
             If *no* format is specified, returns defaultValue.
             </summary>
-            <param name="settings"></param>
+            <param name="format"></param>
             <param name="defaultValue"></param>
             <returns></returns>
         </member>
@@ -654,7 +657,6 @@
             Falls back to using original.RawFormat. Returns null if both 'original' is null.
             RawFormat has a bad reputation, so this may return unexpected values, like MemoryBitmap or something in some situations.
             </summary>
-            <param name="img">The image we are encoding</param>
             <param name="original">The source image that was loaded from a stream, or a string path</param>
             <returns></returns>
         </member>
@@ -670,7 +672,7 @@
             Returns an string instance from the specfied ImageFormat. First matching entry in imageExtensions is used.
             Returns null if not recognized.
             </summary>
-            <param name="ext"></param>
+            <param name="format"></param>
             <returns></returns>
         </member>
         <member name="F:ImageResizer.Plugins.Basic.DefaultEncoder._imageExtensions">
@@ -978,8 +980,13 @@
             <summary>
             Returns a ICacheProvider instance that provides caching system selection and creation.
             </summary>
-            <param name="context"></param>
-            <param name="virtualPathAndQuerystring"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ImageResizer.Configuration.IPipelineConfig.GetFile(System.String,System.Collections.Specialized.NameValueCollection)">
+            <summary>
+            </summary>
+            <param name="virtualPath"></param>
+            <param name="queryString"></param>
             <returns></returns>
         </member>
         <member name="M:ImageResizer.Configuration.IPipelineConfig.FileExists(System.String,System.Collections.Specialized.NameValueCollection)">
@@ -999,6 +1006,11 @@
         <member name="P:ImageResizer.Configuration.IPipelineConfig.ResponseArgsKey">
             <summary>
             The key in Context.Items to store the IResponseArgs object
+            </summary>
+        </member>
+        <member name="P:ImageResizer.Configuration.IPipelineConfig.StopRoutingKey">
+            <summary>
+            The key in Context.Items to set if we want to cancel MVC routing for the request
             </summary>
         </member>
         <member name="P:ImageResizer.Configuration.IPipelineConfig.ModifiedPathKey">
@@ -1173,7 +1185,12 @@
             The number of images processed by this pipeline.
             </summary>
         </member>
-        <!-- Badly formed XML comment ignored for member "T:ImageResizer.Plugins.Basic.Gradient" -->
+        <member name="T:ImageResizer.Plugins.Basic.Gradient">
+            <summary>
+            Allows gradients to be dynamically generated like so:
+            /gradient.png?color1=white&amp;color2=black&amp;angle=40&amp;width=20&amp;height=100
+            </summary>
+        </member>
         <member name="T:ImageResizer.Plugins.IVirtualImageProvider">
             <summary>
             Implement this to allow your class (or VirtualPathProvider subclass) to be used without registering it with the whole ASP.NET system.
@@ -1243,8 +1260,8 @@
             <summary>
             Translates and scales all rings and invisible polygons as specified. 
             </summary>
-            <param name="factor"></param>
-            <param name="origin"></param>
+            <param name="from"></param>
+            <param name="to"></param>
         </member>
         <member name="P:ImageResizer.Resizing.LayoutBuilder.Item(System.String)">
             <summary>
@@ -1319,7 +1336,7 @@
         </member>
         <member name="P:ImageResizer.Resizing.BoxPadding.All">
             <summary>
-            Returns -1 unless all edges are the same width, in which case that width is returned
+            Returns double.NaN unless all edges are the same width, in which case that width is returned
             </summary>
         </member>
         <member name="P:ImageResizer.Resizing.BoxPadding.Empty">
@@ -1653,7 +1670,12 @@
             </summary>
             <param name="c"></param>
         </member>
-        <!-- Badly formed XML comment ignored for member "T:ImageResizer.Plugins.Basic.ClientCache" -->
+        <member name="T:ImageResizer.Plugins.Basic.ClientCache">
+            <summary>
+            Provides default client-caching behavior. Sends Last-Modified header if present, and Expires header if &lt;clientcache minutes="value" /&gt; is configured.
+            Also defaults Cache-control to Public for anonymous requests (and private for authenticated requests)
+            </summary>
+        </member>
         <member name="T:ImageResizer.InterceptModule">
             <summary>
             Monitors incoming image requests to determine if resizing (or other processing) is being requested.
@@ -1691,7 +1713,9 @@
             Called during PostAuthorizeRequest
             </summary>
             <param name="context"></param>
-            <param name="current"></param>
+            <param name="virtualPath"></param>
+            <param name="queryString"></param>
+            <param name="vf"></param>
         </member>
         <member name="M:ImageResizer.InterceptModule.context_PreSendRequestHeaders(System.Object,System.EventArgs)">
             <summary>
@@ -1822,7 +1846,8 @@
         </member>
         <member name="M:ImageResizer.Configuration.Config.BuildImage(System.Object,System.Object,System.String)">
             <summary>
-            Shortuct to CurrentImageBuilder.Build (Useful for COM clients)
+            Shortuct to CurrentImageBuilder.Build (Useful for COM clients). Also creates a destination folder if needed, unlike the normal .Build() call.
+            
             </summary>
             <param name="source"></param>
             <param name="dest"></param>
@@ -1924,7 +1949,7 @@
             <summary>
             Rotates the specified polygon (or set of points) around the origin. 
             </summary>
-            <param name="rect"></param>
+            <param name="poly"></param>
             <param name="degrees"></param>
             <returns></returns>
         </member>
@@ -1932,8 +1957,9 @@
             <summary>
             Rotates the specified polygon (or set of points) around the origin. 
             </summary>
-            <param name="rect"></param>
+            <param name="poly"></param>
             <param name="degrees"></param>
+            <param name="origin"></param>
             <returns></returns>
         </member>
         <member name="M:ImageResizer.Util.PolygonMath.ToPoly(System.Drawing.RectangleF)">
@@ -1965,6 +1991,7 @@
             </summary>
             <param name="v"></param>
             <param name="radians"></param>
+            <param name="origin"></param>
             <returns></returns>
         </member>
         <member name="M:ImageResizer.Util.PolygonMath.ChangeMagnitude(System.Drawing.PointF,System.Single)">
@@ -1986,6 +2013,7 @@
             <summary>
             Returns a modified version of the array, with each element being offset by the specified amount.
             </summary>
+            <param name="points"></param>
             <param name="offset"></param>
             <returns></returns>
         </member>
@@ -2010,7 +2038,7 @@
             <summary>
             Determines the width and height of the paralellogram.
             </summary>
-            <param name="quad"></param>
+            <param name="p"></param>
             <returns></returns>
         </member>
         <member name="M:ImageResizer.Util.PolygonMath.GetSubArray(System.Drawing.PointF[0:,0:],System.Int32)">
@@ -2035,24 +2063,24 @@
             <summary>
             Scales 'inner' to fit inside 'bounding' while maintaining aspect ratio. Upscales and downscales.
             </summary>
+            <param name="inner"></param>
             <param name="bounding"></param>
-            <param name="fitInside"></param>
             <returns></returns>
         </member>
         <member name="M:ImageResizer.Util.PolygonMath.ScaleOutside(System.Drawing.SizeF,System.Drawing.SizeF)">
             <summary>
             Scales 'outer' to be equal or larger than 'innerBounds' while maintaining aspect ratio. Upscales and downscales.
             </summary>
-            <param name="bounding"></param>
-            <param name="fitInside"></param>
+            <param name="innerBounds"></param>
+            <param name="outer"></param>
             <returns></returns>
         </member>
         <member name="M:ImageResizer.Util.PolygonMath.DownScaleInside(System.Drawing.SizeF,System.Drawing.SizeF)">
             <summary>
             Scales 'inner' to fit inside 'bounding' while maintaining aspect ratio. Only downscales.
             </summary>
+            <param name="inner"></param>
             <param name="bounding"></param>
-            <param name="fitInside"></param>
             <returns></returns>
         </member>
         <member name="M:ImageResizer.Util.PolygonMath.FitsInside(System.Drawing.SizeF,System.Drawing.SizeF)">
@@ -2071,8 +2099,8 @@
             
              TODO - some rounding issues going on, not exact numbers here
              </summary>
-             <param name="inner"></param>
-             <param name="outer"></param>
+             <param name="poly"></param>
+             <param name="width"></param>
              <returns></returns>
         </member>
         <member name="M:ImageResizer.Util.PolygonMath.GetCorners(System.Drawing.PointF[],System.Single[])">
@@ -2103,7 +2131,7 @@
             Expands all sides on the specified polygon by the specified offset. Assumes the polygon is concave.
             Returns a new polygon
             </summary>
-            <param name="quad"></param>
+            <param name="poly"></param>
             <param name="offset"></param>
             <returns></returns>
         </member>
@@ -2113,7 +2141,7 @@
             Returns a new polygon.
             
             </summary>
-            <param name="quad"></param>
+            <param name="poly"></param>
             <param name="offsets">An array the same size as poly[], with the distances to expand the edges. Edges are between i and i+1</param>
             <returns></returns>
         </member>
@@ -2392,6 +2420,21 @@
             Defaults to 0x0, which means no limits
             </summary>
         </member>
+        <member name="F:ImageResizer.Plugins.Basic.FolderResizeSyntax.resizeFolder">
+            <summary>
+            Matches /resize(x,y,f)/ syntax
+            Fixed Bug - will replace both slashes.. make first a lookbehind
+            </summary>
+        </member>
+        <member name="M:ImageResizer.Plugins.Basic.FolderResizeSyntax.parseResizeFolderSyntax(System.String,System.Collections.Specialized.NameValueCollection)">
+            <summary>
+            Parses and removes the resize folder syntax "resize(x,y,f)/" from the specified file path. 
+            Places settings into the referenced querystring
+            </summary>
+            <param name="path"></param>
+            <param name="q">The collection to place parsed values into</param>
+            <returns></returns>
+        </member>
         <member name="F:ImageResizer.Configuration.Issues.IssueSeverity.Critical">
             <summary>
             Security and stability issues.
@@ -2410,6 +2453,11 @@
         <member name="F:ImageResizer.Configuration.Issues.IssueSeverity.Warning">
             <summary>
             Non-optimal settings
+            </summary>
+        </member>
+        <member name="T:ImageResizer.Plugins.Basic.ImageHandlerSyntax">
+            <summary>
+            Adds URL syntax support for http://webimageresizer.codeplex.com/, http://imagehandler.codeplex.com/, http://bbimagehandler.codeplex.com/, and http://bip.codeplex.com/
             </summary>
         </member>
         <member name="M:ImageResizer.Util.Utils.parseList(System.String,System.Double)">
@@ -2472,7 +2520,6 @@
             Removes the extension from the filename.
             </summary>
             <param name="path"></param>
-            <param name="newExtension"></param>
             <returns></returns>
         </member>
         <member name="M:ImageResizer.Util.PathUtils.RemoveExtension(System.String)">
@@ -2480,7 +2527,6 @@
             Removes the extension from the filename.
             </summary>
             <param name="path"></param>
-            <param name="newExtension"></param>
             <returns></returns>
         </member>
         <member name="M:ImageResizer.Util.PathUtils.AddExtension(System.String,System.String)">
@@ -2553,6 +2599,7 @@
             Keys and values are UrlEncoded if urlEncode=true.
             </summary>
             <param name="QueryString"></param>
+            <param name="urlEncode"></param>
             <returns></returns>
         </member>
         <member name="M:ImageResizer.Util.PathUtils.RemoveQueryString(System.String)">
@@ -2569,7 +2616,15 @@
             <param name="path"></param>
             <returns></returns>
         </member>
-        <!-- Badly formed XML comment ignored for member "M:ImageResizer.Util.PathUtils.ParseQueryString(System.String)" -->
+        <member name="M:ImageResizer.Util.PathUtils.ParseQueryString(System.String)">
+            <summary>
+            Parses the querystring from the given path into a NameValueCollection. 
+            accepts "file?key=value" and "?key=value&amp;key2=value2" formats. (no path is required)
+            UrlDecodes keys and values.
+            </summary>
+            <param name="path"></param>
+            <returns></returns>
+        </member>
         <member name="M:ImageResizer.Util.PathUtils.ToBase64U(System.Byte[])">
             <summary>
             Converts aribtrary bytes to a URL-safe version of base64 (no = padding, with - instead of + and _ instead of /)
@@ -2635,7 +2690,9 @@
             No extension is appended.
             I.e, a13514\124211ab132592 or 12412ababc12141
             </summary>
-            <param name="request"></param>
+            <param name="data"></param>
+            <param name="subfolders"></param>
+            <param name="dirSeparator"></param>
             <returns></returns>
         </member>
         <member name="M:ImageResizer.Util.UrlHasher.getSubfolder(System.Byte[],System.Int32)">
@@ -2645,6 +2702,7 @@
             Returns null if not configured. Rounds subfolders up to the nearest power of two.
             </summary>
             <param name="hash"></param>
+            <param name="subfolders"></param>
             <returns></returns>
         </member>
         <member name="T:ImageResizer.ResizeSettings">
@@ -2866,7 +2924,17 @@
             Implements IHttpHandler, serves content for the NoCache plugin
             </summary>
         </member>
-        <!-- Badly formed XML comment ignored for member "T:ImageResizer.Plugins.Basic.Image404" -->
+        <member name="T:ImageResizer.Plugins.Basic.Image404">
+            <summary>
+            Redirects image 404 errors to a querystring-specified server-local location, while maintaining querystring values so layout isn't disrupted.
+            For example, missingimage.jpg?404=image.jpg&amp;width=200
+            with the default setting &lt;image404 baseDir="~/" /&gt; will redirect to ~/image.jpg?width=200.
+            You may also configure 'variables', which is the reccomended approach.
+            Ex. &lt;image404 propertyImageDefault="~/images/nophoto.png" /&gt; and use them like so: missingimage.jpg?404=propertImageDefault?width=200 -> ~/images/nophoto.png?width=200.
+            Querystring values in the variable value take precedence. For example, 
+            Ex. &lt;image404 propertyImageDefault="~/images/nophoto.png?format=png" /&gt; and missingimage.jpg?format=jpg&amp;404=propertImageDefault?width=200 -> ~/images/nophoto.png?format=png&amp;width=200.
+            </summary>
+        </member>
         <member name="T:ImageResizer.Resizing.ImageState">
             <summary>
             Encapsulates the state of an image being resized. 
