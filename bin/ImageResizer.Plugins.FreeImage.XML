@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>ImageResizer.Plugins.FreeImage</name>
+    </assembly>
+    <members>
+        <!-- Badly formed XML comment ignored for member "M:ImageResizer.Plugins.FreeImageBuilder.FreeImageBuilderPlugin.BuildJob(ImageResizer.ImageJob)" -->
+        <member name="M:ImageResizer.Plugins.FreeImageBuilder.FreeImageBuilderPlugin.buildFiBitmap(System.IO.Stream,ImageResizer.ImageJob,System.Boolean)">
+            <summary>
+            Builds an FIBitmap from the stream and job.Settings 
+            </summary>
+            <param name="s"></param>
+            <param name="job"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ImageResizer.Plugins.FreeImageEncoder.FreeImageEncoderPlugin.IsValidOutputFormat(System.Drawing.Imaging.ImageFormat)">
+            <summary>
+            Returns true if the this encoder supports the specified image format
+            </summary>
+            <param name="f"></param>
+            <returns></returns>
+        </member>
+    </members>
+</doc>

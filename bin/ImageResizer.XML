@@ -58,13 +58,23 @@
         </member>
         <member name="M:ImageResizer.Resizing.AbstractImageProcessor.PreLoadImage(System.Object@,System.String@,System.Boolean@,ImageResizer.ResizeSettings@)">
             <summary>
-            Extend this to allow additional types of source objects to be accepted by transforming them into accepted types, such as Image, Bitmap,
-            Stream, or a physical path
+            Extend this to allow additional types of source objects to be accepted by transforming them into Bitmap instances.
             </summary>
             <param name="source"></param>
             <param name="path"></param>
             <param name="disposeSource"></param>
             <param name="settings"></param>
+        </member>
+        <member name="M:ImageResizer.Resizing.AbstractImageProcessor.GetStream(System.Object,ImageResizer.ResizeSettings,System.Boolean@,System.String@,System.Boolean@)">
+            <summary>
+            Extend this to allow  additional types of source objects to be accepted by transforming them into Stream instances. First plugin to return a Stream wins.
+            </summary>
+            <param name="source"></param>
+            <param name="settings"></param>
+            <param name="disposeStream"></param>
+            <param name="path"></param>
+            <param name="restoreStreamPosition"></param>
+            <returns></returns>
         </member>
         <member name="M:ImageResizer.Resizing.AbstractImageProcessor.DecodeStreamFailed(System.IO.Stream,ImageResizer.ResizeSettings,System.String)">
             <summary>
@@ -85,12 +95,28 @@
             <param name="optionalPath"></param>
             <returns></returns>
         </member>
-        <member name="M:ImageResizer.Resizing.AbstractImageProcessor.PreAcquireStream(System.Object@,ImageResizer.ResizeSettings)">
+        <member name="M:ImageResizer.Resizing.AbstractImageProcessor.PostDecodeStream(System.Drawing.Bitmap@,ImageResizer.ResizeSettings)">
             <summary>
-            Extend this to allow additional types of *destination* objects to be accepted by transforming them into either a bitmapholder or a stream.
+            Extend this to modify the Bitmap instance after it has been decoded by DecodeStream or DecodeStreamFailed
             </summary>
             <param name="dest"></param>
             <param name="settings"></param>
+        </member>
+        <member name="M:ImageResizer.Resizing.AbstractImageProcessor.PreAcquireStream(System.Object@,ImageResizer.ResizeSettings)">
+            <summary>
+            Extend this to allow additional types of *destination* objects to be accepted by transforming them into a stream.
+            </summary>
+            <param name="dest"></param>
+            <param name="settings"></param>
+        </member>
+        <member name="M:ImageResizer.Resizing.AbstractImageProcessor.BuildJob(ImageResizer.ImageJob)">
+            <summary>
+            The method to override if you want to replace the entire pipeline.
+            All Build() calls call this method first. 
+            Does nothing in ImageBuilder
+            </summary>
+            <param name="job"></param>
+            <returns></returns>
         </member>
         <member name="M:ImageResizer.Resizing.AbstractImageProcessor.buildToStream(System.Drawing.Bitmap,System.IO.Stream,ImageResizer.ResizeSettings)">
             <summary>
@@ -739,7 +765,7 @@
         </member>
         <member name="P:ImageResizer.Plugins.Basic.DefaultEncoder.Quality">
             <summary>
-            The Jpeg compression quality. 90 is the best setting. Not relevant in Png or Gif compression
+            0..100 value. The Jpeg compression quality. 90 is the best setting. Not relevant in Png or Gif compression
             </summary>
         </member>
         <member name="P:ImageResizer.Plugins.Basic.DefaultEncoder.SupportsTransparency">
@@ -756,6 +782,13 @@
             <summary>
             Returns the default file extesnion for OutputFormat
             </summary>
+        </member>
+        <member name="M:ImageResizer.Plugins.ISettingsModifier.Modify(ImageResizer.ResizeSettings)">
+            <summary>
+            Implementations should support being called on their own result multiple result without behavioral differences.
+            </summary>
+            <param name="settings"></param>
+            <returns></returns>
         </member>
         <member name="T:ImageResizer.Configuration.Xml.Selector">
             <summary>
@@ -944,10 +977,41 @@
             Plugins which provide virtual files are registered here.
             </summary>
         </member>
+        <member name="P:ImageResizer.Configuration.PluginConfig.SettingsModifierPlugins">
+            <summary>
+            Plugins which modify image processing settings.
+            </summary>
+        </member>
         <member name="P:ImageResizer.Configuration.PluginConfig.AllPlugins">
             <summary>
             All plugins should be registered here. Used for diagnostic purposes.
             </summary>
+        </member>
+        <member name="P:ImageResizer.Configuration.PluginConfig.LogManager">
+            <summary>
+            Returns the most recently registered Logging plugin, or null.
+            </summary>
+        </member>
+        <member name="T:ImageResizer.Plugins.IVirtualImageProvider">
+            <summary>
+            Implement this to allow your class (or VirtualPathProvider subclass) to be used without registering it with the whole ASP.NET system.
+            </summary>
+        </member>
+        <member name="M:ImageResizer.Plugins.IVirtualImageProvider.FileExists(System.String,System.Collections.Specialized.NameValueCollection)">
+            <summary>
+            Returns true if the specified file exists.
+            </summary>
+            <param name="virtualPath"></param>
+            <param name="queryString"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ImageResizer.Plugins.IVirtualImageProvider.GetFile(System.String,System.Collections.Specialized.NameValueCollection)">
+            <summary>
+            Returns a virtual file instance for the specified path and querystring.
+            </summary>
+            <param name="virtualPath"></param>
+            <param name="queryString"></param>
+            <returns></returns>
         </member>
         <member name="M:ImageResizer.Configuration.IPipelineConfig.IsAcceptedImageType(System.String)">
             <summary>
@@ -984,6 +1048,7 @@
         </member>
         <member name="M:ImageResizer.Configuration.IPipelineConfig.GetFile(System.String,System.Collections.Specialized.NameValueCollection)">
             <summary>
+            Returns an IVirtualFile instance if the specified file exists.
             </summary>
             <param name="virtualPath"></param>
             <param name="queryString"></param>
@@ -1191,26 +1256,10 @@
             /gradient.png?color1=white&amp;color2=black&amp;angle=40&amp;width=20&amp;height=100
             </summary>
         </member>
-        <member name="T:ImageResizer.Plugins.IVirtualImageProvider">
+        <member name="P:ImageResizer.Configuration.IUrlEventArgs.VirtualPath">
             <summary>
-            Implement this to allow your class (or VirtualPathProvider subclass) to be used without registering it with the whole ASP.NET system.
+            Domain-relative path which also includes the path info portion. I.e, '/app/folder/file.aspx/path/info' could be a valid value. Relative to the domain root, not the site or app root.
             </summary>
-        </member>
-        <member name="M:ImageResizer.Plugins.IVirtualImageProvider.FileExists(System.String,System.Collections.Specialized.NameValueCollection)">
-            <summary>
-            Returns true if the specified file exists.
-            </summary>
-            <param name="virtualPath"></param>
-            <param name="queryString"></param>
-            <returns></returns>
-        </member>
-        <member name="M:ImageResizer.Plugins.IVirtualImageProvider.GetFile(System.String,System.Collections.Specialized.NameValueCollection)">
-            <summary>
-            Returns a virtual file instance for the specified path and querystring.
-            </summary>
-            <param name="virtualPath"></param>
-            <param name="queryString"></param>
-            <returns></returns>
         </member>
         <member name="F:ImageResizer.Resizing.LayoutBuilder.ring">
             <summary>
@@ -1416,6 +1465,25 @@
             True if the application should automatically execute ApplyToResponse() during the PreSendRequestHeaders event.
             </summary>
         </member>
+        <member name="M:ImageResizer.Plugins.Basic.DefaultSettings.Pipeline_PostRewrite(System.Web.IHttpModule,System.Web.HttpContext,ImageResizer.Configuration.IUrlEventArgs)">
+            <summary>
+            We duplicate efforts in PostRewrite to ensure that the DiskCache doesn't block configuration changes. 
+            This won't help CloudFront, however.
+            </summary>
+            <param name="sender"></param>
+            <param name="context"></param>
+            <param name="e"></param>
+        </member>
+        <member name="P:ImageResizer.Plugins.Basic.DefaultSettings.ExplicitSizeScaleMode">
+            <summary>
+            The default scale mode to use when 'width' and/or 'height' are used, and mode is not 'max'.
+            </summary>
+        </member>
+        <member name="P:ImageResizer.Plugins.Basic.DefaultSettings.MaxSizeScaleMode">
+            <summary>
+            The default scale mode to use when 'maxwidth' and/or 'maxheight' are used (or mode=max). 
+            </summary>
+        </member>
         <member name="T:ImageResizer.Plugins.Basic.VirtualFolder">
             <summary>
             Functions exactly like an IIS virtual folder, but doesn't require IIS configuration.
@@ -1432,6 +1500,79 @@
             </summary>
             <returns></returns>
         </member>
+        <member name="M:ImageResizer.Plugins.Basic.VirtualFolder.VirtualToPhysical(System.String)">
+            <summary>
+            Converts a virtual path in this folder to a physical path. Returns null if the virtual path is outside the folder.
+            </summary>
+            <param name="virtualPath"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ImageResizer.Plugins.Basic.VirtualFolder.IsVirtualPath(System.String)">
+            <summary>
+            Returns true if the specified path is inside this virtual folder
+            </summary>
+            <param name="virtualPath"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ImageResizer.Plugins.Basic.VirtualFolder.GetDateModifiedUtc(System.String)">
+            <summary>
+            Returns the LastWriteTimeUtc value for the specified virtual file in this folder, or DateTime.MinValue if missing.
+            </summary>
+            <param name="virtualPath"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ImageResizer.Plugins.Basic.VirtualFolder.FileExists(System.String,System.Collections.Specialized.NameValueCollection)">
+            <summary>
+            Returns true if the file exists in this virtual folder, and would not be masking an existing file.
+            Returns false if NoIOPermission is true.
+            </summary>
+            <param name="virtualPath"></param>
+            <param name="queryString"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ImageResizer.Plugins.Basic.VirtualFolder.GetFile(System.String,System.Collections.Specialized.NameValueCollection)">
+            <summary>
+            Unless the path is not within the virtual folder, or IO permissions are missing, will return an IVirtualFile instance for the path. 
+            The file may or may not exist.
+            </summary>
+            <param name="virtualPath"></param>
+            <param name="queryString"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ImageResizer.Plugins.Basic.VirtualFolder.FileExists(System.String)">
+            <summary>
+            For internal use only by the .NET VPP system.
+            </summary>
+            <param name="virtualPath"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ImageResizer.Plugins.Basic.VirtualFolder.GetFile(System.String)">
+            <summary>
+            For internal use only by the .NET VPP system.
+            </summary>
+            <param name="virtualPath"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ImageResizer.Plugins.Basic.VirtualFolder.GetCacheDependency(System.String,System.Collections.IEnumerable,System.DateTime)">
+            <summary>
+            For internal use only by the .NET VPP system.
+            </summary>
+            <param name="virtualPath"></param>
+            <param name="virtualPathDependencies"></param>
+            <param name="utcStart"></param>
+            <returns></returns>
+        </member>
+        <member name="P:ImageResizer.Plugins.Basic.VirtualFolder.FailedToRegisterVpp">
+            <summary>
+            True if the provider attempted to register itself as a VirtualPathProvider and failed due to limited security clearance.
+            False if it did not attempt (say, due to missing IOPermission) , or if it succeeded.
+            </summary>
+        </member>
+        <member name="P:ImageResizer.Plugins.Basic.VirtualFolder.RegisterAsVpp">
+            <summary>
+            If true, the plugin will attempt to register itself as an application-wide VirtualPathProvider instead of a image resizer-specific IVirtualImageProvider.
+            </summary>
+        </member>
         <member name="P:ImageResizer.Plugins.Basic.VirtualFolder.VirtualPath">
             <summary>
             The virtual path served by the VirtualFolder
@@ -1442,6 +1583,11 @@
             The physical path
             </summary>
         </member>
+        <member name="P:ImageResizer.Plugins.Basic.VirtualFolder.NoIOPermission">
+            <summary>
+            True if the plugin has detected it doesn't have sufficient IOPermission to operate.
+            </summary>
+        </member>
         <member name="T:ImageResizer.Plugins.IVirtualFileWithModifiedDate">
             <summary>
             Always implement this if possible. Allows caching systems to detect changes to source files and invalidate cached data properly.
@@ -1450,6 +1596,11 @@
         <member name="P:ImageResizer.Plugins.IVirtualFileWithModifiedDate.ModifiedDateUTC">
             <summary>
             The modified (last write time) of the source file, in UTC form. 
+            </summary>
+        </member>
+        <member name="P:ImageResizer.Plugins.Basic.Presets.OnlyAllowPresets">
+            <summary>
+            If true, the plugin will block all commands except those specified in a preset, and the &amp;preset command itself
             </summary>
         </member>
         <member name="T:ImageResizer.Configuration.Xml.Node">
@@ -1629,14 +1780,46 @@
             When the image is smaller than the requested size, padding is added instead of stretching the image
             </summary>
         </member>
+        <member name="T:ImageResizer.StretchMode">
+            <summary>
+            [Depreciated (Use FitMode)]
+            </summary>
+        </member>
         <member name="F:ImageResizer.StretchMode.Proportionally">
             <summary>
-            Maintains aspect ratio. Default.
+            [Depreciated (Use FitMode)] Maintains aspect ratio. Default.
             </summary>
         </member>
         <member name="F:ImageResizer.StretchMode.Fill">
             <summary>
-            Skews image to fit the new aspect ratio defined by 'width' and 'height'
+            [Depreciated (Use FitMode)] Skews image to fit the new aspect ratio defined by 'width' and 'height'
+            </summary>
+        </member>
+        <member name="T:ImageResizer.FitMode">
+            <summary>
+            How do deal with aspect ratio changes. ]
+            </summary>
+        </member>
+        <member name="F:ImageResizer.FitMode.None">
+            <summary>
+            Fit mode will be determined by other settings, such as &amp;carve=true, &amp;stretch=fill, and &amp;crop=auto. If none are specified and width/height are specified , &amp;mode=pad will be used. If maxwidth/maxheight are used, &amp;mode=max will be used.
+            </summary>
+        </member>
+        <member name="F:ImageResizer.FitMode.Max">
+            <summary>
+            Width and height are considered maximum values. The resulting image may be smaller to maintain its aspect ratio. The image may also be smaller if the source image is smaller
+            </summary>
+        </member>
+        <!-- Badly formed XML comment ignored for member "F:ImageResizer.FitMode.Pad" -->
+        <!-- Badly formed XML comment ignored for member "F:ImageResizer.FitMode.Crop" -->
+        <member name="F:ImageResizer.FitMode.Carve">
+            <summary>
+            Width and height are considered exact values - seam carving is used if there is an aspect ratio difference. Requires the SeamCarving plugin to be installed, otherwise behaves like 'pad'.
+            </summary>
+        </member>
+        <member name="F:ImageResizer.FitMode.Stretch">
+            <summary>
+            Width and height are considered exact values - if there is an aspect ratio difference, the image is stretched.
             </summary>
         </member>
         <member name="F:ImageResizer.CropMode.None">
@@ -1646,7 +1829,7 @@
         </member>
         <member name="F:ImageResizer.CropMode.Auto">
             <summary>
-            Minimally crops to preserve aspect ratio if stretch=proportionally.
+            [Depreciated] Use Mode=Crop. Minimally crops to preserve aspect ratio if stretch=proportionally.
             </summary>
         </member>
         <member name="F:ImageResizer.CropMode.Custom">
@@ -1664,6 +1847,16 @@
             Indicates a custom range is being specified for the values. Base 0.
             </summary>
         </member>
+        <member name="T:ImageResizer.Plugins.VirtualFileWrapper">
+            <summary>
+            Wraps a standard ASP.NET VirtualFile instance in an IVirtualFile-compatible wrapper.
+            </summary>
+        </member>
+        <member name="P:ImageResizer.Plugins.VirtualFileWrapper.UnderlyingFile">
+            <summary>
+            The VirtualFile instance this class is wrapping
+            </summary>
+        </member>
         <member name="M:ImageResizer.Configuration.Issues.IssueGatherer.#ctor(ImageResizer.Configuration.Config)">
             <summary>
             Creates a 'gatherer' that pulls issues from IIssueProviders throughout the Config structure. Even plugins are queried.
@@ -1675,6 +1868,19 @@
             Provides default client-caching behavior. Sends Last-Modified header if present, and Expires header if &lt;clientcache minutes="value" /&gt; is configured.
             Also defaults Cache-control to Public for anonymous requests (and private for authenticated requests)
             </summary>
+        </member>
+        <member name="M:ImageResizer.Configuration.Logging.ILogManager.LoadConfigFromFile(System.String)">
+            <summary>
+            Loads NLog configuration from the specified file.
+            </summary>
+            <param name="fileName">The name of the file to load NLog configuration from.</param>
+        </member>
+        <member name="M:ImageResizer.Configuration.Logging.ILogManager.GetLogger(System.String)">
+            <summary>
+            Creates the specified logger object and assigns a LoggerName to it.
+            </summary>
+            <param name="loggerName">Logger name.</param>
+            <returns>The new logger instance.</returns>
         </member>
         <member name="T:ImageResizer.InterceptModule">
             <summary>
@@ -1698,15 +1904,7 @@
             <param name="sender"></param>
             <param name="e"></param>
         </member>
-        <member name="M:ImageResizer.InterceptModule.fixPath(System.String)">
-            <summary>
-            Turns relative paths into domain-relative paths.
-            Turns app-relative paths into domain relative paths.
-            </summary>
-            <param name="virtualPath"></param>
-            <returns></returns>
-        </member>
-        <member name="M:ImageResizer.InterceptModule.HandleRequest(System.Web.HttpContext,System.String,System.Collections.Specialized.NameValueCollection,System.Object)">
+        <member name="M:ImageResizer.InterceptModule.HandleRequest(System.Web.HttpContext,System.String,System.Collections.Specialized.NameValueCollection,ImageResizer.Plugins.IVirtualFile)">
             <summary>
             Generates the resized image to disk (if needed), then rewrites the request to that location.
             Perform 404 checking before calling this method. Assumes file exists.
@@ -2153,11 +2351,45 @@
             <param name="outer"></param>
             <returns></returns>
         </member>
+        <member name="M:ImageResizer.Util.PolygonMath.CenterInside(System.Drawing.SizeF,System.Drawing.RectangleF)">
+            <summary>
+            Creates a rectangle of size 'size' with a center matching that of bounds.
+            </summary>
+            <param name="sizeF"></param>
+            <param name="imgBounds"></param>
+            <returns></returns>
+        </member>
         <member name="M:ImageResizer.Util.PolygonMath.ToRectangle(System.Drawing.RectangleF)">
             <summary>
             Rounds a floating-point rectangle to an integer rectangle using System.Round
             </summary>
             <param name="r"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ImageResizer.Util.PolygonMath.AlignWith(System.Drawing.RectangleF,System.Drawing.RectangleF,System.Drawing.ContentAlignment)">
+            <summary>
+            Aligns the specified rectangle object with its reference ('container') rectangle using the specified alignment. The container can be smaller than 'obj'.
+            </summary>
+            <param name="obj"></param>
+            <param name="container"></param>
+            <param name="align"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ImageResizer.Util.PolygonMath.AlignWith(System.Drawing.PointF[],System.Drawing.PointF[],System.Drawing.ContentAlignment)">
+            <summary>
+            Aligns the specified polygon with its container (reference) polygon using the specified alignment. The container can be smaller than 'obj'.
+            </summary>
+            <param name="obj"></param>
+            <param name="container"></param>
+            <param name="align"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ImageResizer.Util.PolygonMath.Average(System.Drawing.PointF,System.Drawing.PointF)">
+            <summary>
+            Returns a point equidistant beweteen A and B
+            </summary>
+            <param name="a"></param>
+            <param name="b"></param>
             <returns></returns>
         </member>
         <member name="T:ImageResizer.ImageBuilder">
@@ -2177,29 +2409,25 @@
             </summary>
             <returns></returns>
         </member>
-        <member name="F:ImageResizer.ImageBuilder._encoderProvider">
+        <member name="M:ImageResizer.ImageBuilder.#ctor">
             <summary>
-            Handles the encoder selection and provision proccess.
+            Shouldn't be used except to make a factory instance.
             </summary>
         </member>
-        <member name="M:ImageResizer.ImageBuilder.#ctor(ImageResizer.Encoding.IEncoderProvider)">
+        <member name="M:ImageResizer.ImageBuilder.#ctor(System.Collections.Generic.IEnumerable{ImageResizer.Resizing.BuilderExtension},ImageResizer.Encoding.IEncoderProvider,ImageResizer.Plugins.IVirtualImageProvider,ImageResizer.Plugins.ISettingsModifier)">
             <summary>
-            Creates a new ImageBuilder instance with no extensions.
-            </summary>
-        </member>
-        <member name="M:ImageResizer.ImageBuilder.#ctor(System.Collections.Generic.IEnumerable{ImageResizer.Resizing.BuilderExtension},ImageResizer.Encoding.IEncoderProvider)">
-            <summary>
-            Create a new instance of ImageBuilder using the specified extensions and encoder provider. Extension methods will be fired in the order they exist in the collection.
+            Create a new instance of ImageBuilder using the specified extensions, encoder provider, file provider, and settings filter. Extension methods will be fired in the order they exist in the collection.
             </summary>
             <param name="extensions"></param>
             <param name="encoderProvider"></param>
         </member>
-        <member name="M:ImageResizer.ImageBuilder.Create(System.Collections.Generic.IEnumerable{ImageResizer.Resizing.BuilderExtension},ImageResizer.Encoding.IEncoderProvider)">
+        <member name="M:ImageResizer.ImageBuilder.Create(System.Collections.Generic.IEnumerable{ImageResizer.Resizing.BuilderExtension},ImageResizer.Encoding.IEncoderProvider,ImageResizer.Plugins.IVirtualImageProvider,ImageResizer.Plugins.ISettingsModifier)">
             <summary>
             Creates another instance of the class using the specified extensions. Subclasses should override this and point to their own constructor.
             </summary>
             <param name="extensions"></param>
             <param name="writer"></param>
+            <param name="virtualFileProvider"></param>
             <returns></returns>
         </member>
         <member name="M:ImageResizer.ImageBuilder.Copy">
@@ -2217,14 +2445,37 @@
             <param name="settings">Will ignore ICC profile if ?ignoreicc=true.</param>
             <returns>A Bitmap. The .Tag property will include a BitmapTag instance. If .Tag.Source is not null, remember to dispose it when you dispose the Bitmap.</returns>
         </member>
+        <member name="M:ImageResizer.ImageBuilder.LoadImage(System.Object,ImageResizer.ResizeSettings,System.Boolean)">
+            <summary>
+            Loads a Bitmap from the specified source. If a filename is available, it will be attached to bitmap.Tag in a BitmapTag instance. The Bitmap.Tag.Path value may be a virtual, relative, UNC, windows, or unix path. 
+            Does not dispose 'source' if it is a Stream or Image instance - that's the responsibility of the calling code.
+            </summary>
+            <param name="source">May  be an instance of string, VirtualFile, IVirtualFile IVirtualBitmapFile, HttpPostedFile, Bitmap, Image, or Stream.  If passed an Image instance, the image will be cloned, which will cause metadata, indexed state, and any additional frames to be lost. Accepts physical paths and application relative paths. (C:\... and ~/path) </param>
+            <param name="settings">Will ignore ICC profile if ?ignoreicc=true.</param>
+            <param name="restoreStreamPos">If true, the position of the source stream will be restored after being read</param>
+            <returns>A Bitmap. The .Tag property will include a BitmapTag instance. If .Tag.Source is not null, remember to dispose it when you dispose the Bitmap.</returns>
+        </member>
         <member name="M:ImageResizer.ImageBuilder.DecodeStream(System.IO.Stream,ImageResizer.ResizeSettings,System.String)">
             <summary>
-            Decodes the stream into a bitmap instance. As of 3.0.7, now ensures the stream can safely be closed after the method returns.
+            Decodes the stream into a System.Drawing.Bitmap instance. As of 3.0.7, now ensures the stream can safely be closed after the method returns.
             May copy the stream. The copied stream will be in b.Tag.Source. Does not close or dispose any streams.
             </summary>
             <param name="s"></param>
             <param name="settings"></param>
             <param name="optionalPath"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ImageResizer.ImageBuilder.GetStreamFromSource(System.Object,ImageResizer.ResizeSettings,System.Boolean@,System.String@,System.Boolean@)">
+            <summary>
+            For plugin use only. 
+            Returns a stream instance from the specified source object and settings object. 
+            To exend this method, override GetStream.
+            </summary>
+            <param name="source">The physical or app-relative path, or a VirtualFile, IVirtualFile, Stream, HttpPostedFile, or HttpPostedFileBase instance.</param>
+            <param name="settings">Querystring settings to pass to the VirtualFileProvider</param>
+            <param name="disposeStream">You should externally initialize this to true, unless the user-provided 'source' is a Stream instance. Will be set to false for HttpPostedFile and HttpPostedFileBase instances, so they can be reused. </param>
+            <param name="path">The physical or virtual path associated with the stream (if present). Otherwise null</param>
+            <param name="restoreStreamPosition">True if you should save and restore the seek position of the stream. True for HttpPostedFile and HttpPostedFileBase instances. </param>
             <returns></returns>
         </member>
         <member name="M:ImageResizer.ImageBuilder.Build(System.Object,ImageResizer.ResizeSettings)">
@@ -2374,15 +2625,105 @@
             Handles the encoder selection and provision proccess.
             </summary>
         </member>
+        <member name="P:ImageResizer.ImageBuilder.SettingsModifier">
+            <summary>
+            May be null. A class to modify or normalize ResizeSettings instances before they are used.
+            </summary>
+        </member>
+        <member name="P:ImageResizer.ImageBuilder.VirtualFileProvider">
+            <summary>
+            Provides a resolution service for app-relative URLs. 
+            </summary>
+        </member>
         <member name="P:ImageResizer.ImageBuilder.Current">
             <summary>
             Returns a shared instance of ImageBuilder or a subclass, equivalent to  Config.Current.CurrentImageBuilder
             </summary>
             <returns></returns>
         </member>
-        <member name="T:ImageResizer.ImageBuilder.BitmapHolder">
+        <member name="M:ImageResizer.Configuration.Logging.ILogger.Log(System.String,System.String)">
             <summary>
-            Allows Bitmap Build(object) to wrap void Build(object,object) easily.
+            Writes the diagnostic message at the specified level.
+            </summary>
+            <param name="level">The log level.</param>
+            <param name="message">A <see langword="string" /> to be written.</param>
+        </member>
+        <member name="M:ImageResizer.Configuration.Logging.ILogger.Trace(System.String)">
+            <summary>
+            Writes the diagnostic message at the Trace level.
+            </summary>
+            <param name="message">A <see langword="string" /> to be written.</param>
+        </member>
+        <member name="M:ImageResizer.Configuration.Logging.ILogger.Debug(System.String)">
+            <summary>
+            Writes the diagnostic message at the Debug level.
+            </summary>
+            <param name="message">A <see langword="string" /> to be written.</param>
+        </member>
+        <member name="M:ImageResizer.Configuration.Logging.ILogger.Info(System.String)">
+            <summary>
+            Writes the diagnostic message at the Info level.
+            </summary>
+            <param name="message">A <see langword="string" /> to be written.</param>
+        </member>
+        <member name="M:ImageResizer.Configuration.Logging.ILogger.Warn(System.String)">
+            <summary>
+            Writes the diagnostic message at the Warn level.
+            </summary>
+            <param name="message">A <see langword="string" /> to be written.</param>
+        </member>
+        <member name="M:ImageResizer.Configuration.Logging.ILogger.Error(System.String)">
+            <summary>
+            Writes the diagnostic message at the Error level.
+            </summary>
+            <param name="message">A <see langword="string" /> to be written.</param>
+        </member>
+        <member name="M:ImageResizer.Configuration.Logging.ILogger.Fatal(System.String)">
+            <summary>
+            Writes the diagnostic message at the Fatal level.
+            </summary>
+            <param name="message">A <see langword="string" /> to be written.</param>
+        </member>
+        <member name="M:ImageResizer.Configuration.Logging.ILogger.IsEnabled(System.String)">
+            <summary>
+            Checks if the specified log level is enabled.
+            </summary>
+            <param name="level">The log level.</param>
+            <returns>A value indicating whether the specified log level is enabled.</returns>
+        </member>
+        <member name="P:ImageResizer.Configuration.Logging.ILogger.IsTraceEnabled">
+            <summary>
+            Gets a value indicating whether the Trace level is enabled.
+            </summary>
+        </member>
+        <member name="P:ImageResizer.Configuration.Logging.ILogger.IsDebugEnabled">
+            <summary>
+            Gets a value indicating whether the Debug level is enabled.
+            </summary>
+        </member>
+        <member name="P:ImageResizer.Configuration.Logging.ILogger.IsInfoEnabled">
+            <summary>
+            Gets a value indicating whether the Info level is enabled.
+            </summary>
+        </member>
+        <member name="P:ImageResizer.Configuration.Logging.ILogger.IsWarnEnabled">
+            <summary>
+            Gets a value indicating whether the Warn level is enabled.
+            </summary>
+        </member>
+        <member name="P:ImageResizer.Configuration.Logging.ILogger.IsErrorEnabled">
+            <summary>
+            Gets a value indicating whether the Error level is enabled.
+            </summary>
+        </member>
+        <member name="P:ImageResizer.Configuration.Logging.ILogger.IsFatalEnabled">
+            <summary>
+            Gets a value indicating whether the Fatal level is enabled.
+            </summary>
+        </member>
+        <member name="P:ImageResizer.Configuration.Logging.ILogger.LoggerName">
+            <summary>
+            Gets or sets the logger name.
             </summary>
         </member>
         <member name="T:ImageResizer.Plugins.Basic.SizeLimits">
@@ -2477,14 +2818,21 @@
         </member>
         <member name="M:ImageResizer.Util.Utils.parseFlip(System.String)">
             <summary>
-            Returns RotateNoneFlipNone if not a recognize value.
+            Returns RotateNoneFlipNone if not a recognized value.
+            </summary>
+            <param name="sFlip"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ImageResizer.Util.Utils.parseRotate(System.String)">
+            <summary>
+            Returns 0 if not a recognized value. Rounds the value to 0, 90, 180, or 270
             </summary>
             <param name="sFlip"></param>
             <returns></returns>
         </member>
         <member name="M:ImageResizer.Util.Utils.writeFlip(System.Drawing.RotateFlipType)">
             <summary>
-            Throws an exception if the specified value is unsupported. Rotation values are not supported, and should be specified with the Rotate command.
+            Throws an exception if the specified value is unsupported. Rotation values are not supported, and should be specified with the Rotate or srcRotate command.
             </summary>
             <returns></returns>
         </member>
@@ -2561,6 +2909,14 @@
             <param name="virtualPath"></param>
             <returns></returns>
         </member>
+        <member name="M:ImageResizer.Util.PathUtils.ResolveAppRelativeAssumeAppRelative(System.String)">
+            <summary>
+            Turns relative paths into domain-relative paths.
+            Turns app-relative paths into domain relative paths.
+            </summary>
+            <param name="virtualPath"></param>
+            <returns></returns>
+        </member>
         <member name="M:ImageResizer.Util.PathUtils.AddQueryString(System.String,System.String)">
             <summary>
             Joins the path and querystring. If the path already contains a querystring, they are 'append joined' with the correct character.
@@ -2571,7 +2927,7 @@
         </member>
         <member name="M:ImageResizer.Util.PathUtils.MergeOverwriteQueryString(System.String,System.Collections.Specialized.NameValueCollection)">
             <summary>
-            Overwrites exisisting querystring values in 'path' with the values in 'newQuerystring'
+            Overwrites exisisting querystring values in 'path' with the values in 'newQuerystring'. Doesn't support ; querystrings
             </summary>
             <param name="path"></param>
             <param name="newQuerystring"></param>
@@ -2579,7 +2935,7 @@
         </member>
         <member name="M:ImageResizer.Util.PathUtils.MergeQueryString(System.String,System.Collections.Specialized.NameValueCollection)">
             <summary>
-            Adds the querystring values in 'newQuerystring' to the querystring in Path, but does not overwrite values.
+            Adds the querystring values in 'newQuerystring' to the querystring in Path, but does not overwrite values. Doesn't support ; querystrings
             </summary>
             <param name="path"></param>
             <param name="newQuerystring"></param>
@@ -2616,6 +2972,7 @@
             <param name="path"></param>
             <returns></returns>
         </member>
+        <!-- Badly formed XML comment ignored for member "M:ImageResizer.Util.PathUtils.ParseQueryStringFriendlyAllowSemicolons(System.String)" -->
         <member name="M:ImageResizer.Util.PathUtils.ParseQueryString(System.String)">
             <summary>
             Parses the querystring from the given path into a NameValueCollection. 
@@ -2686,7 +3043,7 @@
         <member name="M:ImageResizer.Util.UrlHasher.hash(System.String,System.Int32,System.String)">
             <summary>
             Builds a key for the cached version, using the hashcode of the normalized URL.
-            if subfolders > 0, dirSeparator will be used to separate the subfolder and the key. 
+            if subfolders > 1, dirSeparator will be used to separate the subfolder and the key. 
             No extension is appended.
             I.e, a13514\124211ab132592 or 12412ababc12141
             </summary>
@@ -2735,6 +3092,12 @@
             <param name="keys"></param>
             <returns></returns>
         </member>
+        <member name="M:ImageResizer.ResizeSettings.SetDefaultImageFormat(System.String)">
+            <summary>
+            If 'thumbnail' and 'format' are not specified, sets 'format' to the specified value.
+            </summary>
+            <param name="format"></param>
+        </member>
         <member name="M:ImageResizer.ResizeSettings.ToString">
             <summary>
             Returns a string containing all the settings in the class, in querystring form. Use ToStringEncoded() to get a URL-safe querystring. 
@@ -2772,10 +3135,20 @@
             The image may be smaller than this value to maintain aspect ratio when both maxwidth and maxheight are specified.
             </summary>
         </member>
+        <member name="P:ImageResizer.ResizeSettings.Quality">
+            <summary>
+            ["quality"]: The jpeg encoding quality to use. (10..100). 90 is the default and best value, you should leave it.
+            </summary>
+        </member>
         <member name="P:ImageResizer.ResizeSettings.MaxHeight">
             <summary>
             ["maxheight"]: Sets the maximum desired height of the image.  (minus padding, borders, margins, effects, and rotation). 
             The image may be smaller than this value to maintain aspect ratio when both maxwidth and maxheight are specified.
+            </summary>
+        </member>
+        <member name="P:ImageResizer.ResizeSettings.Mode">
+            <summary>
+            ["mode"]: Sets the fit mode for the image. max, min, pad, crop, carve, stretch
             </summary>
         </member>
         <member name="P:ImageResizer.ResizeSettings.Rotate">
@@ -2783,25 +3156,30 @@
             ["rotate"] The degress to rotate the image clockwise. -360 to 360.
             </summary>
         </member>
+        <member name="P:ImageResizer.ResizeSettings.Anchor">
+            <summary>
+            How to anchor the image when cropping or adding whitespace to meet sizing requirements.
+            </summary>
+        </member>
         <member name="P:ImageResizer.ResizeSettings.Flip">
             <summary>
-            Allows you to flip the entire resulting image vertically, horizontally, or both.
+            Allows you to flip the entire resulting image vertically, horizontally, or both. Rotation is not supported.
             </summary>
         </member>
         <member name="P:ImageResizer.ResizeSettings.SourceFlip">
             <summary>
-            ["sourceFlip"] Allows you to flip the source image vertically, horizontally, or both.
+            ["sFlip"] Allows you to flip the source image vertically, horizontally, or both. Rotation is not supported.
             </summary>
         </member>
         <member name="P:ImageResizer.ResizeSettings.Scale">
             <summary>
             ["scale"] Whether to downscale, upscale, upscale the canvas, or both upscale or downscale the image as needed. Defaults to
-            DownscaleOnly. 
+            DownscaleOnly when maxwidth/maxheight is used, and Both when width/height are used.
             </summary>
         </member>
         <member name="P:ImageResizer.ResizeSettings.Stretch">
             <summary>
-            Whether to preserve aspect ratio or stretch.
+            [Depreciated] (Replaced by mode=stretch) Whether to preserve aspect ratio or stretch to fill the bounds.
             </summary>
         </member>
         <member name="P:ImageResizer.ResizeSettings.Cache">
@@ -3011,6 +3389,65 @@
         <member name="P:ImageResizer.Resizing.ImageState.Data">
             <summary>
             Allows extensions to store data along with the image state
+            </summary>
+        </member>
+        <member name="M:ImageResizer.ImageJob.Build">
+            <summary>
+            Shorthand method for ImageBuilder.Current.Build(this)
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="P:ImageResizer.ImageJob.Source">
+            <summary>
+            The source image's physical path, app-relative virtual path, or a Stream, byte array, Bitmap, VirtualFile, IVirtualFile, HttpPostedFile, or HttpPostedFileBase instance.
+            </summary>
+        </member>
+        <member name="P:ImageResizer.ImageJob.Dest">
+            <summary>
+            The destination Stream, physical path, or app-relative virtual path. If a Bitmap instance is desired, 
+            set this to typeof(System.Drawing.Bitmap). The result will be stored in .Result
+            </summary>
+        </member>
+        <member name="P:ImageResizer.ImageJob.Result">
+            <summary>
+            The result if a Bitmap, BitmapSource, or IWICBitmapSource instance is requested. 
+            </summary>
+        </member>
+        <member name="P:ImageResizer.ImageJob.Settings">
+            <summary>
+            The image processing settings
+            </summary>
+        </member>
+        <member name="P:ImageResizer.ImageJob.DisposeSourceStream">
+            <summary>
+            If true, and if 'source' is a Stream instance, it will be disposed after it has been read. Defaults to true.
+            </summary>
+        </member>
+        <member name="P:ImageResizer.ImageJob.ResetSourceStream">
+            <summary>
+            If true, and if 'source' is seekable, the stream will be reset to its previous position after being read.
+            Always true for HttpPostedFile(Base) instances, defaults to false for all others.
+            </summary>
+        </member>
+        <member name="P:ImageResizer.ImageJob.DisposeDestinationStream">
+            <summary>
+            If true, and if 'dest' is a Stream instance, it will be disposed after the image has been written. Defaults to false.
+            </summary>
+        </member>
+        <member name="P:ImageResizer.ImageJob.FinalPath">
+            <summary>
+            Contains the final physical path to the image (if 'dest' was a path - null otherwise)
+            </summary>
+        </member>
+        <member name="P:ImageResizer.ImageJob.SourcePathData">
+            <summary>
+            If 'source' contains any path-related data, it is copied into this member for use by format detetction code, so decoding can be optimized.
+            May be a physical or virtual path, or just a file name.
+            </summary>
+        </member>
+        <member name="P:ImageResizer.ImageJob.AddFileExtension">
+            <summary>
+            If true, the appropriate extension for the encoding format will be added to the destination path, and the result will be stored in FinalPath in physical path form.
             </summary>
         </member>
     </members>

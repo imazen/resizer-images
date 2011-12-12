@@ -4,6 +4,44 @@
         <name>ImageResizer.Plugins.SeamCarving</name>
     </assembly>
     <members>
+        <member name="M:SevenZipReduced.ICoder.Code(System.IO.Stream,System.IO.Stream,System.Int64,System.Int64,SevenZipReduced.ICodeProgress)">
+            <summary>
+            Codes streams.
+            </summary>
+            <param name="inStream">
+            input Stream.
+            </param>
+            <param name="outStream">
+            output Stream.
+            </param>
+            <param name="inSize">
+            input Size. -1 if unknown.
+            </param>
+            <param name="outSize">
+            output Size. -1 if unknown.
+            </param>
+            <param name="progress">
+            callback progress reference.
+            </param>
+            <exception cref="T:SevenZipReduced.DataErrorException">
+            if input stream is not valid
+            </exception>
+        </member>
+        <member name="P:ImageResizer.Plugins.SeamCarving.CairJob.Output">
+            <summary>
+            Whether to carve or display the energy functions
+            </summary>
+        </member>
+        <member name="P:ImageResizer.Plugins.SeamCarving.CairJob.Timeout">
+            <summary>
+            How many ms to wait before killing the processes
+            </summary>
+        </member>
+        <member name="P:ImageResizer.Plugins.SeamCarving.CairJob.Threads">
+            <summary>
+            How many threads to use
+            </summary>
+        </member>
         <member name="F:ImageResizer.Plugins.SeamCarving.CairManager._concurrentExecutions">
             <summary>
             Number of executing CAIR.exe processes
@@ -31,6 +69,95 @@
             <summary>
             The maximum number of waiting threads (for a CAIR.exe instance) to permit before denying requests. Set to 0 (default) to permit an endless number of threads to wait (although request timeout will still be effect).
             Set this value to at least 30 
+            </summary>
+        </member>
+        <member name="T:SevenZipReduced.DataErrorException">
+            <summary>
+            The exception that is thrown when an error in input stream occurs during decoding.
+            </summary>
+        </member>
+        <member name="T:SevenZipReduced.InvalidParamException">
+            <summary>
+            The exception that is thrown when the value of an argument is outside the allowable range.
+            </summary>
+        </member>
+        <member name="M:SevenZipReduced.ICodeProgress.SetProgress(System.Int64,System.Int64)">
+            <summary>
+            Callback progress.
+            </summary>
+            <param name="inSize">
+            input size. -1 if unknown.
+            </param>
+            <param name="outSize">
+            output size. -1 if unknown.
+            </param>
+        </member>
+        <member name="T:SevenZipReduced.CoderPropID">
+            <summary>
+            Provides the fields that represent properties idenitifiers for compressing.
+            </summary>
+        </member>
+        <member name="F:SevenZipReduced.CoderPropID.DefaultProp">
+            <summary>
+            Specifies default property.
+            </summary>
+        </member>
+        <member name="F:SevenZipReduced.CoderPropID.DictionarySize">
+            <summary>
+            Specifies size of dictionary.
+            </summary>
+        </member>
+        <member name="F:SevenZipReduced.CoderPropID.UsedMemorySize">
+            <summary>
+            Specifies size of memory for PPM*.
+            </summary>
+        </member>
+        <member name="F:SevenZipReduced.CoderPropID.Order">
+            <summary>
+            Specifies order for PPM methods.
+            </summary>
+        </member>
+        <member name="F:SevenZipReduced.CoderPropID.BlockSize">
+            <summary>
+            Specifies Block Size.
+            </summary>
+        </member>
+        <!-- Badly formed XML comment ignored for member "F:SevenZipReduced.CoderPropID.PosStateBits" -->
+        <!-- Badly formed XML comment ignored for member "F:SevenZipReduced.CoderPropID.LitContextBits" -->
+        <!-- Badly formed XML comment ignored for member "F:SevenZipReduced.CoderPropID.LitPosBits" -->
+        <member name="F:SevenZipReduced.CoderPropID.NumFastBytes">
+            <summary>
+            Specifies number of fast bytes for LZ*.
+            </summary>
+        </member>
+        <member name="F:SevenZipReduced.CoderPropID.MatchFinder">
+            <summary>
+            Specifies match finder. LZMA: "BT2", "BT4" or "BT4B".
+            </summary>
+        </member>
+        <member name="F:SevenZipReduced.CoderPropID.MatchFinderCycles">
+            <summary>
+            Specifies the number of match finder cyckes.
+            </summary>
+        </member>
+        <member name="F:SevenZipReduced.CoderPropID.NumPasses">
+            <summary>
+            Specifies number of passes.
+            </summary>
+        </member>
+        <member name="F:SevenZipReduced.CoderPropID.Algorithm">
+            <summary>
+            Specifies number of algorithm.
+            </summary>
+        </member>
+        <member name="F:SevenZipReduced.CoderPropID.NumThreads">
+            <summary>
+            Specifies the number of threads.
+            </summary>
+        </member>
+        <member name="F:SevenZipReduced.CoderPropID.EndMarker">
+            <summary>
+            Specifies mode with end marker.
             </summary>
         </member>
     </members>

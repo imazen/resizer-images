@@ -4,6 +4,13 @@
         <name>ImageResizer.Plugins.S3Reader</name>
     </assembly>
     <members>
+        <member name="M:ImageResizer.Plugins.S3Reader.S3Reader.Uninstall(ImageResizer.Configuration.Config)">
+            <summary>
+            This plugin can only be removed if it was installed as an IVirtualImageProvider (vpp="false")
+            </summary>
+            <param name="c"></param>
+            <returns></returns>
+        </member>
         <member name="P:ImageResizer.Plugins.S3Reader.S3Reader.S3config">
             <summary>
             Configure S3 authentication and encryption details
@@ -63,7 +70,7 @@
         </member>
         <member name="P:ImageResizer.Plugins.S3Reader.S3VirtualPathProvider.VirtualFilesystemPrefix">
             <summary>
-            Requests starting with this path will be handled by this virtual path provider. Must be in app-relative form: "~/s3/"
+            Requests starting with this path will be handled by this virtual path provider. Should be in app-relative form: "~/s3/". Will be converted to root-relative form upon assigment. Trailing slash required, auto-added.
             </summary>
         </member>
         <member name="P:ImageResizer.Plugins.S3Reader.S3VirtualPathProvider.MetadataAbsoluteExpiration">

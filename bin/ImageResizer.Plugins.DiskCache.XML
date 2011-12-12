@@ -49,7 +49,7 @@
         </member>
         <member name="F:ImageResizer.Plugins.DiskCache.CacheQueryResult.Miss">
             <summary>
-            The item wasn't cached, but was successfully added to the cache
+            The item wasn't cached, but was successfully added to the cache (or queued, in which case you should read .Data instead of .PhysicalPath)
             </summary>
         </member>
         <member name="F:ImageResizer.Plugins.DiskCache.CacheQueryResult.Hit">
@@ -59,7 +59,13 @@
         </member>
         <member name="P:ImageResizer.Plugins.DiskCache.CacheResult.PhysicalPath">
             <summary>
-            The physical path to the cached item
+            The physical path to the cached item. Verify .Data is null before trying to read from this file.
+            </summary>
+        </member>
+        <member name="P:ImageResizer.Plugins.DiskCache.CacheResult.Data">
+            <summary>
+            Provides a read-only stream to the data. Usually a MemoryStream instance, but you should dispose it once you are done. 
+            If this value is not null, it indicates that the file has not yet been written to disk, and you should read it from this stream instead.
             </summary>
         </member>
         <member name="P:ImageResizer.Plugins.DiskCache.CacheResult.RelativePath">
@@ -82,6 +88,11 @@
             Notifies the CleanupManager that a file was added under the specified relative path. Allows CleanupManager to detect when a folder needs cleanup work.
             </summary>
             <param name="relativePath"></param>
+        </member>
+        <member name="P:ImageResizer.Plugins.DiskCache.CleanupManager.ExteralProcessCleaning">
+            <summary>
+            When true, indicates that another process is managing cleanup operations - this thread is idle, waiting for the other process to end before it can pick up work.
+            </summary>
         </member>
         <member name="T:ImageResizer.Plugins.DiskCache.DiskCacheException">
             <summary>
@@ -126,7 +137,13 @@
         </member>
         <member name="M:ImageResizer.Plugins.DiskCache.DiskCache.IsConfigurationValid">
             <summary>
-            Returns true if the configured settings are valid.
+            Returns true if the configured settings are valid and .NET (not NTFS) permissions will work.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ImageResizer.Plugins.DiskCache.DiskCache.HasFileIOPermission">
+            <summary>
+            Returns true if .NET permissions allow writing to the cache directory. Does not check NTFS permissions. 
             </summary>
             <returns></returns>
         </member>
@@ -164,18 +181,32 @@
         <member name="P:ImageResizer.Plugins.DiskCache.DiskCache.CleanupStrategy">
             <summary>
             Only relevant when AutoClean=true. Settings about how background cache cleanup are performed.
+            It is best not to modify these settings. There are very complicated and non-obvious factors involved in their choice.
             </summary>
         </member>
         <member name="P:ImageResizer.Plugins.DiskCache.DiskCache.CacheAccessTimeout">
             <summary>
             How many milliseconds to wait for a cached item to be available. Values below 0 are set to 0. Defaults to 15 seconds.
+            Actual time spent waiting may be 2 or 3x this value, if multiple layers of synchronization require a wait.
             </summary>
         </member>
         <member name="P:ImageResizer.Plugins.DiskCache.DiskCache.HashModifiedDate">
             <summary>
             If true, when a source file is changed, a new file will be created instead of overwriting the old cached file.
-            This helps prevent file lock contention on high-traffic servers. Defaults to true. 
+            This helps prevent file lock contention on high-traffic servers. Defaults to true.  
+            Do NOT set this to false in a Web Garden or if you have overlapped recycle enabled, as you may risk having occasional failed requests due
+            to write contention by separate proccesses.
             Changes the hash function, so you should delete the cache folder whenever this setting is modified.
+            </summary>
+        </member>
+        <member name="P:ImageResizer.Plugins.DiskCache.DiskCache.AsyncWrites">
+            <summary>
+            If true, writes to the disk cache will be performed outside the request thread, allowing responses to return to the client quicker. 
+            </summary>
+        </member>
+        <member name="P:ImageResizer.Plugins.DiskCache.DiskCache.AsyncBufferSize">
+            <summary>
+            If more than this amount of memory (in bytes) is currently allocated by queued writes, the request will be processed synchronously instead of asynchronously.
             </summary>
         </member>
         <member name="P:ImageResizer.Plugins.DiskCache.DiskCache.VirtualCacheDir">
@@ -318,7 +349,39 @@
             Fired when a file disappears from the cache folder without the cache index knowing about it.
             </summary>
         </member>
-        <member name="M:ImageResizer.Plugins.DiskCache.CleanupWorker.#ctor(ImageResizer.Plugins.DiskCache.CleanupStrategy,ImageResizer.Plugins.DiskCache.Cleanup.CleanupQueue,ImageResizer.Plugins.DiskCache.CustomDiskCache)">
+        <member name="M:ImageResizer.Plugins.DiskCache.Async.AsyncWriteCollection.Get(System.String,System.DateTime)">
+            <summary>
+            If the collection contains the specified item, it is returned. Otherwise, null is returned.
+            </summary>
+            <param name="relativePath"></param>
+            <param name="modifiedUtc"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ImageResizer.Plugins.DiskCache.Async.AsyncWriteCollection.GetQueuedBufferBytes">
+            <summary>
+            Returns how many bytes are allocated by buffers in the queue. May be 2x the amount of data. Represents how much ram is being used by the queue, not the amount of encoded bytes that will actually be written.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ImageResizer.Plugins.DiskCache.Async.AsyncWriteCollection.Remove(ImageResizer.Plugins.DiskCache.Async.AsyncWrite)">
+            <summary>
+            Removes the specified object based on its relativepath and modifieddateutc values.
+            </summary>
+            <param name="w"></param>
+        </member>
+        <member name="M:ImageResizer.Plugins.DiskCache.Async.AsyncWriteCollection.Queue(ImageResizer.Plugins.DiskCache.Async.AsyncWrite,ImageResizer.Plugins.DiskCache.Async.AsyncWriteCollection.WriterDelegate)">
+            <summary>
+            Returns false when (a) the specified AsyncWrite value already exists, (b) the queue is full, or (c) the thread pool queue is full
+            </summary>
+            <param name="w"></param>
+            <returns></returns>
+        </member>
+        <member name="P:ImageResizer.Plugins.DiskCache.Async.AsyncWriteCollection.MaxQueueBytes">
+            <summary>
+            How many bytes of buffered file data to hold in memory before refusing futher queue requests and forcing them to be executed synchronously.
+            </summary>
+        </member>
+        <member name="M:ImageResizer.Plugins.DiskCache.CleanupWorker.#ctor(ImageResizer.Configuration.Logging.ILoggerProvider,ImageResizer.Plugins.DiskCache.CleanupStrategy,ImageResizer.Plugins.DiskCache.Cleanup.CleanupQueue,ImageResizer.Plugins.DiskCache.CustomDiskCache)">
             <summary>
             Creates and starts a thread that consumes the queue, pausing until notified when 'queue' empties.
             </summary>
@@ -331,14 +394,40 @@
             Tells the worker to check the queue for more work.
             </summary>
         </member>
+        <member name="F:ImageResizer.Plugins.DiskCache.CleanupWorker.lastFoundItemsOverMax">
+            <summary>
+            The last time a cache folder exceeded both the optimum and maximum limits for file count. 
+            If recent, indicates a misconfiguration; the subfolders="" count needs to be increased.
+            </summary>
+        </member>
+        <member name="F:ImageResizer.Plugins.DiskCache.CleanupWorker.lastBusy">
+            <summary>
+            The last time a cache query came through
+            </summary>
+        </member>
         <member name="M:ImageResizer.Plugins.DiskCache.CleanupWorker.BeLazy">
             <summary>
             Tells the worker to avoid work for a little bit.
             </summary>
         </member>
+        <member name="F:ImageResizer.Plugins.DiskCache.CleanupWorker.lastWorked">
+            <summary>
+            The last time we did work (or attempted to do work, failing if the queue was empty)
+            </summary>
+        </member>
+        <member name="F:ImageResizer.Plugins.DiskCache.CleanupWorker.otherProcessManagingCleanup">
+            <summary>
+            When true, indicates that another process is managing cleanup operations - this thread is idle, waiting for the other process to end before it can pick up work.
+            </summary>
+        </member>
         <member name="M:ImageResizer.Plugins.DiskCache.CleanupWorker.main">
             <summary>
             Thread runs this method.
+            </summary>
+        </member>
+        <member name="M:ImageResizer.Plugins.DiskCache.CleanupWorker.mainInner">
+            <summary>
+            Processes work items from the queue, using at most 50%
             </summary>
         </member>
         <member name="M:ImageResizer.Plugins.DiskCache.CleanupWorker.DoWorkFor(System.TimeSpan)">
@@ -348,6 +437,11 @@
             </summary>
             <param name="length"></param>
             <returns></returns>
+        </member>
+        <member name="P:ImageResizer.Plugins.DiskCache.CleanupWorker.ExteralProcessCleaning">
+            <summary>
+            When true, indicates that another process is managing cleanup operations - this thread is idle, waiting for the other process to end before it can pick up work.
+            </summary>
         </member>
         <member name="M:ImageResizer.Plugins.DiskCache.Cleanup.CleanupQueue.QueueIfUnique(ImageResizer.Plugins.DiskCache.CleanupWorkItem)">
             <summary>
@@ -422,6 +516,44 @@
             Supports subfolders for scalability.
             </summary>
         </member>
+        <member name="M:ImageResizer.Plugins.DiskCache.CustomDiskCache.GetCachedFile(System.String,System.String,ImageResizer.Caching.ResizeImageDelegate,System.DateTime,System.Int32)">
+            <summary>
+            If the cached data exists and is up-to-date, returns the path to it. Otherwise, this function tries to cache the data and return the path.
+            </summary>
+            <param name="keyBasis">The basis for the key. Should not include the modified date, that is handled inside the function.</param>
+            <param name="extension">The extension to use for the cached file.</param>
+            <param name="writeCallback">A method that accepts a Stream argument and writes the data to it.</param>
+            <param name="sourceModifiedUtc">The modified date of the source file. Should be DateTime.MinValue if not available</param>
+            <param name="timeoutMs"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ImageResizer.Plugins.DiskCache.CustomDiskCache.GetCachedFile(System.String,System.String,ImageResizer.Caching.ResizeImageDelegate,System.DateTime,System.Int32,System.Boolean)">
+            <summary>
+            May return either a physical file name or a MemoryStream with the data. 
+            Faster than GetCachedFile, as writes are (usually) asynchronous. If the write queue is full, the write is forced to be synchronous again.
+            Identical to GetCachedFile() when async=false
+            </summary>
+            <param name="keyBasis"></param>
+            <param name="extension"></param>
+            <param name="writeCallback"></param>
+            <param name="sourceModifiedUtc"></param>
+            <param name="timeoutMs"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ImageResizer.Plugins.DiskCache.CustomDiskCache.TryWriteFile(ImageResizer.Plugins.DiskCache.CacheResult,System.String,System.String,ImageResizer.Caching.ResizeImageDelegate,System.DateTime,System.Int32,System.Boolean)">
+            <summary>
+            Returns true if either (a) the file was written, or (b) the file already existed with a matching modified date.
+            Returns false if the in-process lock failed. Throws an exception if any kind of file or processing exception occurs.
+            </summary>
+            <param name="result"></param>
+            <param name="physicalPath"></param>
+            <param name="relativePath"></param>
+            <param name="writeCallback"></param>
+            <param name="sourceModifiedUtc"></param>
+            <param name="timeoutMs"></param>
+            <param name="recheckFS"></param>
+            <returns></returns>
+        </member>
         <member name="E:ImageResizer.Plugins.DiskCache.CustomDiskCache.CacheResultReturned">
             <summary>
             Fired immediately before GetCachedFile return the result value. 
@@ -430,6 +562,16 @@
         <member name="P:ImageResizer.Plugins.DiskCache.CustomDiskCache.Locks">
             <summary>
             Provides string-based locking for file write access.
+            </summary>
+        </member>
+        <member name="P:ImageResizer.Plugins.DiskCache.CustomDiskCache.QueueLocks">
+            <summary>
+            Provides string-based locking for image resizing (not writing, just processing). Prevents duplication of efforts in async mode, where 'Locks' is not being used.
+            </summary>
+        </member>
+        <member name="P:ImageResizer.Plugins.DiskCache.CustomDiskCache.CurrentWrites">
+            <summary>
+            Contains all the queued and in-progress writes to the cache. 
             </summary>
         </member>
         <member name="P:ImageResizer.Plugins.DiskCache.CustomDiskCache.Index">
@@ -540,6 +682,17 @@
         <member name="P:ImageResizer.Plugins.DiskCache.CachedFileInfo.UpdatedUtc">
             <summary>
             The Created date of the cached file - the last time the cached file was written to
+            </summary>
+        </member>
+        <member name="M:ImageResizer.Plugins.DiskCache.Async.AsyncWrite.GetReadonlyStream">
+            <summary>
+            Wraps the data in a readonly MemoryStream so it can be accessed on another thread
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="P:ImageResizer.Plugins.DiskCache.Async.AsyncWrite.JobCreatedAt">
+            <summary>
+            Returns the UTC time this AsyncWrite object was created.
             </summary>
         </member>
     </members>
