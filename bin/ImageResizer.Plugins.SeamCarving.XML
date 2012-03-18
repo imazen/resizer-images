@@ -122,9 +122,21 @@
             Specifies Block Size.
             </summary>
         </member>
-        <!-- Badly formed XML comment ignored for member "F:SevenZipReduced.CoderPropID.PosStateBits" -->
-        <!-- Badly formed XML comment ignored for member "F:SevenZipReduced.CoderPropID.LitContextBits" -->
-        <!-- Badly formed XML comment ignored for member "F:SevenZipReduced.CoderPropID.LitPosBits" -->
+        <member name="F:SevenZipReduced.CoderPropID.PosStateBits">
+            <summary>
+            Specifies number of postion state bits for LZMA (0 &lt;= x &lt;= 4).
+            </summary>
+        </member>
+        <member name="F:SevenZipReduced.CoderPropID.LitContextBits">
+            <summary>
+            Specifies number of literal context bits for LZMA (0 &lt;= x &lt;= 8).
+            </summary>
+        </member>
+        <member name="F:SevenZipReduced.CoderPropID.LitPosBits">
+            <summary>
+            Specifies number of literal position bits for LZMA (0 &lt;= x &lt;= 4).
+            </summary>
+        </member>
         <member name="F:SevenZipReduced.CoderPropID.NumFastBytes">
             <summary>
             Specifies number of fast bytes for LZ*.

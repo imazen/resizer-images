@@ -4,6 +4,15 @@
         <name>ImageResizer.Plugins.AdvancedFilters</name>
     </assembly>
     <members>
+        <member name="M:ImageResizer.Plugins.AdvancedFilters.AdvancedFilters.GetRadius(ImageResizer.Resizing.ImageState,System.String,System.String,System.Double)">
+            <summary>
+            Calculates a radius based on the provided value, using min(width/height) as the normalizing factor. Querystring values are interpreted as 1/1000ths of the normalizing factor.
+            </summary>
+            <param name="s"></param>
+            <param name="key"></param>
+            <param name="key2"></param>
+            <returns></returns>
+        </member>
         <member name="M:ImageResizer.Plugins.AdvancedFilters.AdvancedFilters.AdjustContrastBrightnessSaturation(AForge.Imaging.Filters.HSLLinear,System.Single,System.Single,System.Single,System.Boolean)">
             <summary>
             

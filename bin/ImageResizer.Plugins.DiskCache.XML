@@ -333,8 +333,15 @@
             <summary>
             Returns true if both dates are equal to the nearest 200th of a second.
             </summary>
-            <param name="modifiedOn"></param>
-            <param name="dateTime"></param>
+            <param name="d1"></param>
+            <param name="d2"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ImageResizer.Plugins.DiskCache.CachedFolder.checkRelativePath(System.String)">
+            <summary>
+            
+            </summary>
+            <param name="relativePath"></param>
             <returns></returns>
         </member>
         <member name="P:ImageResizer.Plugins.DiskCache.CachedFolder.IsValid">
@@ -468,6 +475,22 @@
             Provides thread-safe access to the index of the disk cache
             </summary>
         </member>
+        <member name="M:ImageResizer.Plugins.DiskCache.CleanupStrategy.LoadFrom(ImageResizer.Configuration.Xml.Node)">
+            <summary>
+            Loads settings from the specified node. Attribute names and property names must match.
+            </summary>
+            <param name="n"></param>
+        </member>
+        <member name="M:ImageResizer.Plugins.DiskCache.CleanupStrategy.SaveDefaults">
+            <summary>
+            Saves the current settings to the dictionary of default settings.
+            </summary>
+        </member>
+        <member name="M:ImageResizer.Plugins.DiskCache.CleanupStrategy.RestoreDefaults">
+            <summary>
+            Restores the default property valies
+            </summary>
+        </member>
         <member name="P:ImageResizer.Plugins.DiskCache.CleanupStrategy.StartupDelay">
             <summary>
             How long to wait before beginning the initial cache indexing and cleanup.
@@ -531,7 +554,7 @@
             <summary>
             May return either a physical file name or a MemoryStream with the data. 
             Faster than GetCachedFile, as writes are (usually) asynchronous. If the write queue is full, the write is forced to be synchronous again.
-            Identical to GetCachedFile() when async=false
+            Identical to GetCachedFile() when asynchronous=false
             </summary>
             <param name="keyBasis"></param>
             <param name="extension"></param>
@@ -566,7 +589,7 @@
         </member>
         <member name="P:ImageResizer.Plugins.DiskCache.CustomDiskCache.QueueLocks">
             <summary>
-            Provides string-based locking for image resizing (not writing, just processing). Prevents duplication of efforts in async mode, where 'Locks' is not being used.
+            Provides string-based locking for image resizing (not writing, just processing). Prevents duplication of efforts in asynchronous mode, where 'Locks' is not being used.
             </summary>
         </member>
         <member name="P:ImageResizer.Plugins.DiskCache.CustomDiskCache.CurrentWrites">

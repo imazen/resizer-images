@@ -109,7 +109,8 @@
             <summary>
             Loads a bitmap, cached using asp.net's cache
             </summary>
-            <param name="localfile"></param>
+            <param name="query"></param>
+            <param name="virtualPath"></param>
             <returns></returns>
         </member>
         <member name="P:ImageResizer.Plugins.Watermark.ImageLayer.Path">
@@ -167,7 +168,11 @@
             The name of the font
             </summary>
         </member>
-        <!-- Badly formed XML comment ignored for member "P:ImageResizer.Plugins.Watermark.TextLayer.FontSize" -->
+        <member name="P:ImageResizer.Plugins.Watermark.TextLayer.FontSize">
+            <summary>
+            The size of the font in pixels
+            </summary>  
+        </member>
         <member name="P:ImageResizer.Plugins.Watermark.TextLayer.Style">
             <summary>
             The font style

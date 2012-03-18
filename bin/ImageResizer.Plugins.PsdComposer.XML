@@ -97,35 +97,16 @@
             <param name="b"></param>
             <param name="c"></param>
         </member>
-        <!-- Badly formed XML comment ignored for member "M:ImageResizer.Plugins.PsdComposer.PsdComposerPlugin.IsPathPSDToCompose(System.String,System.Collections.Specialized.NameValueCollection)" -->
-        <member name="M:ImageResizer.Plugins.PsdComposer.PsdComposerPlugin.GetPhysicalPath(System.String)">
+        <member name="M:ImageResizer.Plugins.PsdComposer.PsdComposerPlugin.IsPathPSDToCompose(System.String,System.Collections.Specialized.NameValueCollection)">
             <summary>
-            Strips the .psd.jpg to .psd, converts to physical path
+            True if the file is a .psd.jpeg, .psd.png, etc file.
             </summary>
-            <param name="virtualPath"></param>
-            <returns></returns>
         </member>
-        <member name="M:ImageResizer.Plugins.PsdComposer.PsdComposerPlugin.FileExists(System.String)">
+        <member name="M:ImageResizer.Plugins.PsdComposer.PsdComposerPlugin.StripFakeExtension(System.String)">
             <summary>
-            For internal VPP use only.
+            Strips the .psd.jpg to .psd, converts to physical physicalPath
             </summary>
             <param name="virtualPath"></param>
-            <returns></returns>
-        </member>
-        <member name="M:ImageResizer.Plugins.PsdComposer.PsdComposerPlugin.GetFile(System.String)">
-            <summary>
-            For internal VPP use only
-            </summary>
-            <param name="virtualPath"></param>
-            <returns></returns>
-        </member>
-        <member name="M:ImageResizer.Plugins.PsdComposer.PsdComposerPlugin.GetCacheDependency(System.String,System.Collections.IEnumerable,System.DateTime)">
-            <summary>
-            For internal VPP use only
-            </summary>
-            <param name="virtualPath"></param>
-            <param name="virtualPathDependencies"></param>
-            <param name="utcStart"></param>
             <returns></returns>
         </member>
         <member name="M:ImageResizer.Plugins.PsdComposer.PsdVirtualFile.Open">
@@ -143,11 +124,6 @@
         <member name="P:ImageResizer.Plugins.PsdComposer.PsdVirtualFile.Exists">
             <summary>
             Returns true if the row exists. 
-            </summary>
-        </member>
-        <member name="P:ImageResizer.Plugins.PsdComposer.PsdVirtualFile.ModifiedDateUTC">
-            <summary>
-            Returns the last modified date of the row. Cached for performance.
             </summary>
         </member>
         <member name="T:ImageResizer.Plugins.PsdComposer.MemCachedFile">

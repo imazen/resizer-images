@@ -35,7 +35,14 @@
             <param name="restoreStreamPosition"></param>
             <returns></returns>
         </member>
-        <!-- Badly formed XML comment ignored for member "M:ImageResizer.Plugins.RemoteReader.RemoteReaderPlugin.CreateSignedUrl(System.String,System.Collections.Specialized.NameValueCollection)" -->
+        <member name="M:ImageResizer.Plugins.RemoteReader.RemoteReaderPlugin.CreateSignedUrl(System.String,System.Collections.Specialized.NameValueCollection)">
+            <summary>
+            Generates a signed domain-relative URL in the form "/app/remote.jpg.ashx?width=200&amp;urlb64=aHnSh3haSh...&amp;hmac=913f3KJGK3hj"
+            </summary>
+            <param name="remoteUrl"></param>
+            <param name="settings"></param>
+            <returns></returns>
+        </member>
         <member name="M:ImageResizer.Plugins.RemoteReader.RemoteReaderPlugin.ParseRequest(System.String,System.Collections.Specialized.NameValueCollection)">
             <summary>
             Parses the specified path and querystring. Verifies the hmac signature for querystring specified paths, parses the
@@ -45,6 +52,22 @@
             <param name="virtualPath"></param>
             <param name="query"></param>
             <returns></returns>
+        </member>
+        <member name="M:ImageResizer.Plugins.RemoteReader.RemoteReaderPlugin.GetUriStream(System.Uri,System.Int32)">
+            <summary>
+            Returns a stream of the HTTP response to the specified URL with a 15 second timeout. 
+            Throws a FileNotFoundException instead of a WebException for 404 errors.
+            Can throw a variety of exceptions: ProtocolViolationException, WebException,  FileNotFoundException,
+            SecurityException, NotSupportedException?, and InvalidOperationException?.
+            </summary>
+            <param name="uri"></param>
+            <param name="maxRedirects"></param>
+            <returns></returns>
+        </member>
+        <member name="P:ImageResizer.Plugins.RemoteReader.RemoteReaderPlugin.AllowedRedirects">
+            <summary>
+            How many redirects to follow before throwing an exception. Defaults to 5.
+            </summary>
         </member>
         <member name="P:ImageResizer.Plugins.RemoteReader.RemoteReaderPlugin.Current">
             <summary>
