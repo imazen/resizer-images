@@ -5,6 +5,7 @@
     void Application_Start(object sender, EventArgs e) 
     {
         // Code that runs on application startup
+        ImageResizer.Configuration.Config.Current.Plugins.LoadPlugins();
         ImageResizer.Configuration.Config.Current.Pipeline.Rewrite += Pipeline_Rewrite;
     }
 
