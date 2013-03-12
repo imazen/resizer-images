@@ -10,6 +10,7 @@
 
     void Pipeline_Rewrite(IHttpModule sender, HttpContext context, ImageResizer.Configuration.IUrlEventArgs e)
     {
+        if (e.QueryString["scache"] == null) e.QueryString["scache"] = "disk";
         
         if (e.VirtualPath.StartsWith("/rw/", StringComparison.OrdinalIgnoreCase)) e.VirtualPath = "/s3/resizer-web" + e.VirtualPath.Substring(3);
         if (e.VirtualPath.StartsWith("/ri/", StringComparison.OrdinalIgnoreCase)) e.VirtualPath = "/s3/resizer-images" + e.VirtualPath.Substring(3);
