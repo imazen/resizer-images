@@ -38,30 +38,78 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-<Reference Include="ImageResizer"><HintPath>Packages\ImageResizer.4.0.0-prerelease0499\lib\net45\ImageResizer.dll</HintPath></Reference>
-<Reference Include="Imazen.WebP"><HintPath>Packages\Imazen.WebP.4.0.0-prerelease0499\lib\net45\Imazen.WebP.dll</HintPath></Reference>
-<Reference Include="ImageResizer.Plugins.AdvancedFilters"><HintPath>Packages\ImageResizer.Plugins.AdvancedFilters.4.0.0-prerelease0499\lib\net45\ImageResizer.Plugins.AdvancedFilters.dll</HintPath></Reference>
-<Reference Include="ImageResizer.Plugins.AnimatedGifs"><HintPath>Packages\ImageResizer.Plugins.AnimatedGifs.4.0.0-prerelease0499\lib\net45\ImageResizer.Plugins.AnimatedGifs.dll</HintPath></Reference>
-<Reference Include="ImageResizer.Plugins.AzureReader2"><HintPath>Packages\ImageResizer.Plugins.AzureReader2.4.0.0-prerelease0499\lib\net45\ImageResizer.Plugins.AzureReader2.dll</HintPath></Reference>
-<Reference Include="ImageResizer.Plugins.CloudFront"><HintPath>Packages\ImageResizer.Plugins.CloudFront.4.0.0-prerelease0499\lib\net45\ImageResizer.Plugins.CloudFront.dll</HintPath></Reference>
-<Reference Include="ImageResizer.Plugins.DiskCache"><HintPath>Packages\ImageResizer.Plugins.DiskCache.4.0.0-prerelease0499\lib\net45\ImageResizer.Plugins.DiskCache.dll</HintPath></Reference>
-<Reference Include="ImageResizer.Plugins.Logging"><HintPath>Packages\ImageResizer.Plugins.Logging.4.0.0-prerelease0499\lib\net45\ImageResizer.Plugins.Logging.dll</HintPath></Reference>
-<Reference Include="ImageResizer.Plugins.PdfRenderer"><HintPath>Packages\ImageResizer.Plugins.PdfRenderer.4.0.0-prerelease0499\lib\net45\ImageResizer.Plugins.PdfRenderer.dll</HintPath></Reference>
-<Reference Include="ImageResizer.Plugins.PrettyGifs"><HintPath>Packages\ImageResizer.Plugins.PrettyGifs.4.0.0-prerelease0499\lib\net45\ImageResizer.Plugins.PrettyGifs.dll</HintPath></Reference>
-<Reference Include="ImageResizer.Plugins.PsdComposer"><HintPath>Packages\ImageResizer.Plugins.PsdComposer.4.0.0-prerelease0499\lib\net45\ImageResizer.Plugins.PsdComposer.dll</HintPath></Reference>
-<Reference Include="ImageResizer.Plugins.PsdReader"><HintPath>Packages\ImageResizer.Plugins.PsdReader.4.0.0-prerelease0499\lib\net45\ImageResizer.Plugins.PsdReader.dll</HintPath></Reference>
-<Reference Include="ImageResizer.Plugins.RemoteReader"><HintPath>Packages\ImageResizer.Plugins.RemoteReader.4.0.0-prerelease0499\lib\net45\ImageResizer.Plugins.RemoteReader.dll</HintPath></Reference>
-<Reference Include="ImageResizer.Plugins.S3Reader2"><HintPath>Packages\ImageResizer.Plugins.S3Reader2.4.0.0-prerelease0499\lib\net45\ImageResizer.Plugins.S3Reader2.dll</HintPath></Reference>
-<Reference Include="ImageResizer.Plugins.SeamCarving"><HintPath>Packages\ImageResizer.Plugins.SeamCarving.4.0.0-prerelease0499\lib\net45\ImageResizer.Plugins.SeamCarving.dll</HintPath></Reference>
-<Reference Include="ImageResizer.Plugins.SimpleFilters"><HintPath>Packages\ImageResizer.Plugins.SimpleFilters.4.0.0-prerelease0499\lib\net45\ImageResizer.Plugins.SimpleFilters.dll</HintPath></Reference>
-<Reference Include="ImageResizer.Plugins.Watermark"><HintPath>Packages\ImageResizer.Plugins.Watermark.4.0.0-prerelease0499\lib\net45\ImageResizer.Plugins.Watermark.dll</HintPath></Reference>
-<Reference Include="ImageResizer.Plugins.WebP"><HintPath>Packages\ImageResizer.Plugins.WebP.4.0.0-prerelease0499\lib\net45\ImageResizer.Plugins.WebP.dll</HintPath></Reference>
-<Reference Include="ImageResizer.Plugins.WhitespaceTrimmer"><HintPath>Packages\ImageResizer.Plugins.WhitespaceTrimmer.4.0.0-prerelease0499\lib\net45\ImageResizer.Plugins.WhitespaceTrimmer.dll</HintPath></Reference>
-<Reference Include="ImageResizer.Plugins.Wic"><HintPath>Packages\ImageResizer.Plugins.Wic.4.0.0-prerelease0499\lib\net45\ImageResizer.Plugins.Wic.dll</HintPath></Reference>
-<Reference Include="ImageResizer.Plugins.Faces"><HintPath>Packages\ImageResizer.Plugins.Faces.4.0.0-prerelease0499\lib\net45\ImageResizer.Plugins.Faces.dll</HintPath></Reference>
-<Reference Include="ImageResizer.Plugins.RedEye"><HintPath>Packages\ImageResizer.Plugins.RedEye.4.0.0-prerelease0499\lib\net45\ImageResizer.Plugins.RedEye.dll</HintPath></Reference>
-<Reference Include="ImageResizer.Plugins.FFmpeg"><HintPath>Packages\ImageResizer.Plugins.FFmpeg.4.0.0-prerelease0499\lib\net45\ImageResizer.Plugins.FFmpeg.dll</HintPath></Reference>
-<Reference Include="ImageResizer.Plugins.FreeImage"><HintPath>Packages\ImageResizer.Plugins.FreeImage.4.0.0-prerelease0499\lib\net45\ImageResizer.Plugins.FreeImage.dll</HintPath></Reference>
+    <Reference Include="ImageResizer">
+      <HintPath>Packages\ImageResizer.4.0.0-prerelease0499\lib\net45\ImageResizer.dll</HintPath>
+    </Reference>
+    <Reference Include="Imazen.WebP">
+      <HintPath>Packages\Imazen.WebP.4.0.0-prerelease0499\lib\net45\Imazen.WebP.dll</HintPath>
+    </Reference>
+    <Reference Include="ImageResizer.Plugins.AdvancedFilters">
+      <HintPath>Packages\ImageResizer.Plugins.AdvancedFilters.4.0.0-prerelease0499\lib\net45\ImageResizer.Plugins.AdvancedFilters.dll</HintPath>
+    </Reference>
+    <Reference Include="ImageResizer.Plugins.AnimatedGifs">
+      <HintPath>Packages\ImageResizer.Plugins.AnimatedGifs.4.0.0-prerelease0499\lib\net45\ImageResizer.Plugins.AnimatedGifs.dll</HintPath>
+    </Reference>
+    <Reference Include="ImageResizer.Plugins.AzureReader2">
+      <HintPath>Packages\ImageResizer.Plugins.AzureReader2.4.0.0-prerelease0499\lib\net45\ImageResizer.Plugins.AzureReader2.dll</HintPath>
+    </Reference>
+    <Reference Include="ImageResizer.Plugins.CloudFront">
+      <HintPath>Packages\ImageResizer.Plugins.CloudFront.4.0.0-prerelease0499\lib\net45\ImageResizer.Plugins.CloudFront.dll</HintPath>
+    </Reference>
+    <Reference Include="ImageResizer.Plugins.DiskCache">
+      <HintPath>Packages\ImageResizer.Plugins.DiskCache.4.0.0-prerelease0499\lib\net45\ImageResizer.Plugins.DiskCache.dll</HintPath>
+    </Reference>
+    <Reference Include="ImageResizer.Plugins.Logging">
+      <HintPath>Packages\ImageResizer.Plugins.Logging.4.0.0-prerelease0499\lib\net45\ImageResizer.Plugins.Logging.dll</HintPath>
+    </Reference>
+    <Reference Include="ImageResizer.Plugins.PdfRenderer">
+      <HintPath>Packages\ImageResizer.Plugins.PdfRenderer.4.0.0-prerelease0499\lib\net45\ImageResizer.Plugins.PdfRenderer.dll</HintPath>
+    </Reference>
+    <Reference Include="ImageResizer.Plugins.PrettyGifs">
+      <HintPath>Packages\ImageResizer.Plugins.PrettyGifs.4.0.0-prerelease0499\lib\net45\ImageResizer.Plugins.PrettyGifs.dll</HintPath>
+    </Reference>
+    <Reference Include="ImageResizer.Plugins.PsdComposer">
+      <HintPath>Packages\ImageResizer.Plugins.PsdComposer.4.0.0-prerelease0499\lib\net45\ImageResizer.Plugins.PsdComposer.dll</HintPath>
+    </Reference>
+    <Reference Include="ImageResizer.Plugins.PsdReader">
+      <HintPath>Packages\ImageResizer.Plugins.PsdReader.4.0.0-prerelease0499\lib\net45\ImageResizer.Plugins.PsdReader.dll</HintPath>
+    </Reference>
+    <Reference Include="ImageResizer.Plugins.RemoteReader">
+      <HintPath>Packages\ImageResizer.Plugins.RemoteReader.4.0.0-prerelease0499\lib\net45\ImageResizer.Plugins.RemoteReader.dll</HintPath>
+    </Reference>
+    <Reference Include="ImageResizer.Plugins.S3Reader2">
+      <HintPath>Packages\ImageResizer.Plugins.S3Reader2.4.0.0-prerelease0499\lib\net45\ImageResizer.Plugins.S3Reader2.dll</HintPath>
+    </Reference>
+    <Reference Include="ImageResizer.Plugins.SeamCarving">
+      <HintPath>Packages\ImageResizer.Plugins.SeamCarving.4.0.0-prerelease0499\lib\net45\ImageResizer.Plugins.SeamCarving.dll</HintPath>
+    </Reference>
+    <Reference Include="ImageResizer.Plugins.SimpleFilters">
+      <HintPath>Packages\ImageResizer.Plugins.SimpleFilters.4.0.0-prerelease0499\lib\net45\ImageResizer.Plugins.SimpleFilters.dll</HintPath>
+    </Reference>
+    <Reference Include="ImageResizer.Plugins.Watermark">
+      <HintPath>Packages\ImageResizer.Plugins.Watermark.4.0.0-prerelease0499\lib\net45\ImageResizer.Plugins.Watermark.dll</HintPath>
+    </Reference>
+    <Reference Include="ImageResizer.Plugins.WebP">
+      <HintPath>Packages\ImageResizer.Plugins.WebP.4.0.0-prerelease0499\lib\net45\ImageResizer.Plugins.WebP.dll</HintPath>
+    </Reference>
+    <Reference Include="ImageResizer.Plugins.WhitespaceTrimmer">
+      <HintPath>Packages\ImageResizer.Plugins.WhitespaceTrimmer.4.0.0-prerelease0499\lib\net45\ImageResizer.Plugins.WhitespaceTrimmer.dll</HintPath>
+    </Reference>
+    <Reference Include="ImageResizer.Plugins.Wic">
+      <HintPath>Packages\ImageResizer.Plugins.Wic.4.0.0-prerelease0499\lib\net45\ImageResizer.Plugins.Wic.dll</HintPath>
+    </Reference>
+    <Reference Include="ImageResizer.Plugins.Faces">
+      <HintPath>Packages\ImageResizer.Plugins.Faces.4.0.0-prerelease0499\lib\net45\ImageResizer.Plugins.Faces.dll</HintPath>
+    </Reference>
+    <Reference Include="ImageResizer.Plugins.RedEye">
+      <HintPath>Packages\ImageResizer.Plugins.RedEye.4.0.0-prerelease0499\lib\net45\ImageResizer.Plugins.RedEye.dll</HintPath>
+    </Reference>
+    <Reference Include="ImageResizer.Plugins.FFmpeg">
+      <HintPath>Packages\ImageResizer.Plugins.FFmpeg.4.0.0-prerelease0499\lib\net45\ImageResizer.Plugins.FFmpeg.dll</HintPath>
+    </Reference>
+    <Reference Include="ImageResizer.Plugins.FreeImage">
+      <HintPath>Packages\ImageResizer.Plugins.FreeImage.4.0.0-prerelease0499\lib\net45\ImageResizer.Plugins.FreeImage.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
@@ -83,18 +131,40 @@
   <ItemGroup>
     <Content Include="NuGet.config" />
     <Content Include="packages.config" />
-    <Content Include="resizer-images\JCropSample\Advanced.aspx" />
-    <Content Include="resizer-images\JCropSample\Basic.htm" />
-    <Content Include="resizer-images\JCropSample\css\Jcrop.gif" />
-    <Content Include="resizer-images\JCropSample\css\jquery.Jcrop.css" />
-    <Content Include="resizer-images\JCropSample\fountain-small.jpg" />
-    <Content Include="resizer-images\JCropSample\js\jquery.Jcrop.js" />
-    <Content Include="resizer-images\JCropSample\js\jquery.Jcrop.min.js" />
-    <Content Include="resizer-images\JCropSample\js\jquery.min.js" />
-    <Content Include="resizer-images\JCropSample\red-leaf.jpg" />
-    <Content Include="resizer-images\psd1.psd" />
-    <Content Include="resizer-images\watermarks\Sun_256.png" />
-    <Content Include="resizer-images\Web.config" />
+    <Content Include="JCropSample\Advanced.aspx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="JCropSample\Basic.htm">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="JCropSample\css\Jcrop.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="JCropSample\css\jquery.Jcrop.css">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="JCropSample\fountain-small.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="JCropSample\js\jquery.Jcrop.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="JCropSample\js\jquery.Jcrop.min.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="JCropSample\js\jquery.min.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="JCropSample\red-leaf.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="psd1.psd">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="watermarks\Sun_256.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Web.config" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -103,54 +173,142 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="resizer-images\218.gif" />
-    <Content Include="resizer-images\2_computers.gif" />
-    <Content Include="resizer-images\caves.jpg" />
-    <Content Include="resizer-images\cherry-blossoms.jpg" />
-    <Content Include="resizer-images\clock.gif" />
-    <Content Include="resizer-images\clock2.gif" />
-    <Content Include="resizer-images\counter.gif" />
-    <Content Include="resizer-images\cs3-cmyk-8bit.jpg" />
-    <Content Include="resizer-images\dewdrops.jpg" />
-    <Content Include="resizer-images\flames.jpg" />
-    <Content Include="resizer-images\forest.jpg" />
-    <Content Include="resizer-images\fountain-small.jpg" />
-    <Content Include="resizer-images\fountain.jpg" />
-    <Content Include="resizer-images\Global.asax" />
-    <Content Include="resizer-images\grass.jpg" />
-    <Content Include="resizer-images\heading.jpg" />
-    <Content Include="resizer-images\horizontal-line.gif" />
-    <Content Include="resizer-images\image.jpg" />
-    <Content Include="resizer-images\imazen_400.png" />
-    <Content Include="resizer-images\Moon_256.png" />
-    <Content Include="resizer-images\mountain.jpg" />
-    <Content Include="resizer-images\mountaintops.jpg" />
-    <Content Include="resizer-images\night-bridge.jpg" />
-    <Content Include="resizer-images\night-city.jpg" />
-    <Content Include="resizer-images\optical.gif" />
-    <Content Include="resizer-images\orange-flower.jpg" />
-    <Content Include="resizer-images\pink-rose.jpg" />
-    <Content Include="resizer-images\quality-original.jpg" />
-    <Content Include="resizer-images\red-leaf.jpg" />
-    <Content Include="resizer-images\rose-leaf.jpg" />
-    <Content Include="resizer-images\rounding-error.jpg" />
-    <Content Include="resizer-images\rounding-error.png" />
-    <Content Include="resizer-images\sample.tif" />
-    <Content Include="resizer-images\Saturn_256.png" />
-    <Content Include="resizer-images\statues.jpg" />
-    <Content Include="resizer-images\sunset.jpg" />
-    <Content Include="resizer-images\Sun_256.png" />
-    <Content Include="resizer-images\tractor-tiny.jpg" />
-    <Content Include="resizer-images\tractor.JPG" />
-    <Content Include="resizer-images\tulip-leaf-ws2003.gif" />
-    <Content Include="resizer-images\tulip-leaf.jpg" />
-    <Content Include="resizer-images\utah.jpg" />
-    <Content Include="resizer-images\utah2.jpg" />
-    <Content Include="resizer-images\zermatt.jpg" />
+    <Content Include="218.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="2_computers.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="caves.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="cherry-blossoms.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="clock.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="clock2.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="counter.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="cs3-cmyk-8bit.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="dewdrops.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="flames.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="forest.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="fountain-small.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="fountain.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Global.asax">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="grass.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="heading.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="horizontal-line.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="image.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="imazen_400.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Moon_256.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="mountain.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="mountaintops.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="night-bridge.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="night-city.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="optical.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="orange-flower.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="pink-rose.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="quality-original.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="red-leaf.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="rose-leaf.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="rounding-error.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="rounding-error.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="sample.tif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Saturn_256.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="statues.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="sunset.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Sun_256.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="tractor-tiny.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="tractor.JPG">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="tulip-leaf-ws2003.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="tulip-leaf.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="utah.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="utah2.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="zermatt.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="resizer-images\JCropSample\Advanced.aspx.cs">
+    <None Include="JCropSample\Advanced.aspx.cs">
       <DependentUpon>Advanced.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </None>
