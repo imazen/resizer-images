@@ -1,0 +1,193 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{26458FB9-5EF7-413C-BDB4-E2DA69C6B4A2}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Dummy</RootNamespace>
+    <AssemblyName>Dummy</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <UseIISExpress>true</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+<Reference Include="ImageResizer"><HintPath>Packages\ImageResizer.4.0.0-prerelease0499\lib\net45\ImageResizer.dll</HintPath></Reference>
+<Reference Include="Imazen.WebP"><HintPath>Packages\Imazen.WebP.4.0.0-prerelease0499\lib\net45\Imazen.WebP.dll</HintPath></Reference>
+<Reference Include="ImageResizer.Plugins.AdvancedFilters"><HintPath>Packages\ImageResizer.Plugins.AdvancedFilters.4.0.0-prerelease0499\lib\net45\ImageResizer.Plugins.AdvancedFilters.dll</HintPath></Reference>
+<Reference Include="ImageResizer.Plugins.AnimatedGifs"><HintPath>Packages\ImageResizer.Plugins.AnimatedGifs.4.0.0-prerelease0499\lib\net45\ImageResizer.Plugins.AnimatedGifs.dll</HintPath></Reference>
+<Reference Include="ImageResizer.Plugins.AzureReader2"><HintPath>Packages\ImageResizer.Plugins.AzureReader2.4.0.0-prerelease0499\lib\net45\ImageResizer.Plugins.AzureReader2.dll</HintPath></Reference>
+<Reference Include="ImageResizer.Plugins.CloudFront"><HintPath>Packages\ImageResizer.Plugins.CloudFront.4.0.0-prerelease0499\lib\net45\ImageResizer.Plugins.CloudFront.dll</HintPath></Reference>
+<Reference Include="ImageResizer.Plugins.DiskCache"><HintPath>Packages\ImageResizer.Plugins.DiskCache.4.0.0-prerelease0499\lib\net45\ImageResizer.Plugins.DiskCache.dll</HintPath></Reference>
+<Reference Include="ImageResizer.Plugins.Logging"><HintPath>Packages\ImageResizer.Plugins.Logging.4.0.0-prerelease0499\lib\net45\ImageResizer.Plugins.Logging.dll</HintPath></Reference>
+<Reference Include="ImageResizer.Plugins.PdfRenderer"><HintPath>Packages\ImageResizer.Plugins.PdfRenderer.4.0.0-prerelease0499\lib\net45\ImageResizer.Plugins.PdfRenderer.dll</HintPath></Reference>
+<Reference Include="ImageResizer.Plugins.PrettyGifs"><HintPath>Packages\ImageResizer.Plugins.PrettyGifs.4.0.0-prerelease0499\lib\net45\ImageResizer.Plugins.PrettyGifs.dll</HintPath></Reference>
+<Reference Include="ImageResizer.Plugins.PsdComposer"><HintPath>Packages\ImageResizer.Plugins.PsdComposer.4.0.0-prerelease0499\lib\net45\ImageResizer.Plugins.PsdComposer.dll</HintPath></Reference>
+<Reference Include="ImageResizer.Plugins.PsdReader"><HintPath>Packages\ImageResizer.Plugins.PsdReader.4.0.0-prerelease0499\lib\net45\ImageResizer.Plugins.PsdReader.dll</HintPath></Reference>
+<Reference Include="ImageResizer.Plugins.RemoteReader"><HintPath>Packages\ImageResizer.Plugins.RemoteReader.4.0.0-prerelease0499\lib\net45\ImageResizer.Plugins.RemoteReader.dll</HintPath></Reference>
+<Reference Include="ImageResizer.Plugins.S3Reader2"><HintPath>Packages\ImageResizer.Plugins.S3Reader2.4.0.0-prerelease0499\lib\net45\ImageResizer.Plugins.S3Reader2.dll</HintPath></Reference>
+<Reference Include="ImageResizer.Plugins.SeamCarving"><HintPath>Packages\ImageResizer.Plugins.SeamCarving.4.0.0-prerelease0499\lib\net45\ImageResizer.Plugins.SeamCarving.dll</HintPath></Reference>
+<Reference Include="ImageResizer.Plugins.SimpleFilters"><HintPath>Packages\ImageResizer.Plugins.SimpleFilters.4.0.0-prerelease0499\lib\net45\ImageResizer.Plugins.SimpleFilters.dll</HintPath></Reference>
+<Reference Include="ImageResizer.Plugins.Watermark"><HintPath>Packages\ImageResizer.Plugins.Watermark.4.0.0-prerelease0499\lib\net45\ImageResizer.Plugins.Watermark.dll</HintPath></Reference>
+<Reference Include="ImageResizer.Plugins.WebP"><HintPath>Packages\ImageResizer.Plugins.WebP.4.0.0-prerelease0499\lib\net45\ImageResizer.Plugins.WebP.dll</HintPath></Reference>
+<Reference Include="ImageResizer.Plugins.WhitespaceTrimmer"><HintPath>Packages\ImageResizer.Plugins.WhitespaceTrimmer.4.0.0-prerelease0499\lib\net45\ImageResizer.Plugins.WhitespaceTrimmer.dll</HintPath></Reference>
+<Reference Include="ImageResizer.Plugins.Wic"><HintPath>Packages\ImageResizer.Plugins.Wic.4.0.0-prerelease0499\lib\net45\ImageResizer.Plugins.Wic.dll</HintPath></Reference>
+<Reference Include="ImageResizer.Plugins.Faces"><HintPath>Packages\ImageResizer.Plugins.Faces.4.0.0-prerelease0499\lib\net45\ImageResizer.Plugins.Faces.dll</HintPath></Reference>
+<Reference Include="ImageResizer.Plugins.RedEye"><HintPath>Packages\ImageResizer.Plugins.RedEye.4.0.0-prerelease0499\lib\net45\ImageResizer.Plugins.RedEye.dll</HintPath></Reference>
+<Reference Include="ImageResizer.Plugins.FFmpeg"><HintPath>Packages\ImageResizer.Plugins.FFmpeg.4.0.0-prerelease0499\lib\net45\ImageResizer.Plugins.FFmpeg.dll</HintPath></Reference>
+<Reference Include="ImageResizer.Plugins.FreeImage"><HintPath>Packages\ImageResizer.Plugins.FreeImage.4.0.0-prerelease0499\lib\net45\ImageResizer.Plugins.FreeImage.dll</HintPath></Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="NuGet.config" />
+    <Content Include="packages.config" />
+    <Content Include="resizer-images\JCropSample\Advanced.aspx" />
+    <Content Include="resizer-images\JCropSample\Basic.htm" />
+    <Content Include="resizer-images\JCropSample\css\Jcrop.gif" />
+    <Content Include="resizer-images\JCropSample\css\jquery.Jcrop.css" />
+    <Content Include="resizer-images\JCropSample\fountain-small.jpg" />
+    <Content Include="resizer-images\JCropSample\js\jquery.Jcrop.js" />
+    <Content Include="resizer-images\JCropSample\js\jquery.Jcrop.min.js" />
+    <Content Include="resizer-images\JCropSample\js\jquery.min.js" />
+    <Content Include="resizer-images\JCropSample\red-leaf.jpg" />
+    <Content Include="resizer-images\psd1.psd" />
+    <Content Include="resizer-images\watermarks\Sun_256.png" />
+    <Content Include="resizer-images\Web.config" />
+    <None Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+    <None Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="resizer-images\218.gif" />
+    <Content Include="resizer-images\2_computers.gif" />
+    <Content Include="resizer-images\caves.jpg" />
+    <Content Include="resizer-images\cherry-blossoms.jpg" />
+    <Content Include="resizer-images\clock.gif" />
+    <Content Include="resizer-images\clock2.gif" />
+    <Content Include="resizer-images\counter.gif" />
+    <Content Include="resizer-images\cs3-cmyk-8bit.jpg" />
+    <Content Include="resizer-images\dewdrops.jpg" />
+    <Content Include="resizer-images\flames.jpg" />
+    <Content Include="resizer-images\forest.jpg" />
+    <Content Include="resizer-images\fountain-small.jpg" />
+    <Content Include="resizer-images\fountain.jpg" />
+    <Content Include="resizer-images\Global.asax" />
+    <Content Include="resizer-images\grass.jpg" />
+    <Content Include="resizer-images\heading.jpg" />
+    <Content Include="resizer-images\horizontal-line.gif" />
+    <Content Include="resizer-images\image.jpg" />
+    <Content Include="resizer-images\imazen_400.png" />
+    <Content Include="resizer-images\Moon_256.png" />
+    <Content Include="resizer-images\mountain.jpg" />
+    <Content Include="resizer-images\mountaintops.jpg" />
+    <Content Include="resizer-images\night-bridge.jpg" />
+    <Content Include="resizer-images\night-city.jpg" />
+    <Content Include="resizer-images\optical.gif" />
+    <Content Include="resizer-images\orange-flower.jpg" />
+    <Content Include="resizer-images\pink-rose.jpg" />
+    <Content Include="resizer-images\quality-original.jpg" />
+    <Content Include="resizer-images\red-leaf.jpg" />
+    <Content Include="resizer-images\rose-leaf.jpg" />
+    <Content Include="resizer-images\rounding-error.jpg" />
+    <Content Include="resizer-images\rounding-error.png" />
+    <Content Include="resizer-images\sample.tif" />
+    <Content Include="resizer-images\Saturn_256.png" />
+    <Content Include="resizer-images\statues.jpg" />
+    <Content Include="resizer-images\sunset.jpg" />
+    <Content Include="resizer-images\Sun_256.png" />
+    <Content Include="resizer-images\tractor-tiny.jpg" />
+    <Content Include="resizer-images\tractor.JPG" />
+    <Content Include="resizer-images\tulip-leaf-ws2003.gif" />
+    <Content Include="resizer-images\tulip-leaf.jpg" />
+    <Content Include="resizer-images\utah.jpg" />
+    <Content Include="resizer-images\utah2.jpg" />
+    <Content Include="resizer-images\zermatt.jpg" />
+    <Content Include="Web.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="resizer-images\JCropSample\Advanced.aspx.cs">
+      <DependentUpon>Advanced.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>44954</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:5601/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
