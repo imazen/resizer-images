@@ -467,7 +467,7 @@
     <When Condition="($(TargetFrameworkIdentifier) == '.NETFramework' And ($(TargetFrameworkVersion) == 'v4.5' Or $(TargetFrameworkVersion) == 'v4.5.1' Or $(TargetFrameworkVersion) == 'v4.5.2' Or $(TargetFrameworkVersion) == 'v4.5.3')) Or ($(TargetFrameworkIdentifier) == 'MonoAndroid') Or ($(TargetFrameworkIdentifier) == 'MonoTouch')">
       <ItemGroup>
         <Reference Include="ImageResizer.Plugins.FastScaling">
-          <HintPath>packages\ImageResizer.Plugins.FastScaling.x64\lib\net45\ImageResizer.Plugins.FastScaling.dll</HintPath>
+          <HintPath>packages\ImageResizer.Plugins.FastScaling.x86\lib\net45\ImageResizer.Plugins.FastScaling.dll</HintPath>
           <Private>True</Private>
           <Paket>True</Paket>
         </Reference>

@@ -11,7 +11,7 @@ ImageResizer.Plugins.CopyMetadata
 ImageResizer.Plugins.DiagnosticJson
 ImageResizer.Plugins.DiskCache
 ImageResizer.Plugins.Faces
-ImageResizer.Plugins.FastScaling.x64
+ImageResizer.Plugins.FastScaling.x86
 ImageResizer.Plugins.FFmpeg
 ImageResizer.Plugins.FreeImage
 ImageResizer.Plugins.Logging
