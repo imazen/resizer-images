@@ -30,5 +30,6 @@ ImageResizer.Plugins.Watermark
 ImageResizer.Plugins.WebP
 ImageResizer.Plugins.WhitespaceTrimmer
 ImageResizer.Plugins.Wic
+ImageResizer.Storage
 ImageResizer.WebConfig
 Imazen.WebP
