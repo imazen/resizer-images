@@ -300,6 +300,11 @@
       <Paket>True</Paket>
     </Reference>
   </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+  </ItemGroup>
   <Choose>
     <When Condition="$(TargetFrameworkIdentifier) == '.NETCore'">
       <ItemGroup>
