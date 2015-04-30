@@ -16,6 +16,7 @@ ImageResizer.Plugins.FFmpeg
 ImageResizer.Plugins.FreeImage
 ImageResizer.Plugins.Logging
 ImageResizer.Plugins.MongoReader
+ImageResizer.Plugins.PdfiumRenderer
 ImageResizer.Plugins.PdfRenderer
 ImageResizer.Plugins.PrettyGifs
 ImageResizer.Plugins.PsdComposer
