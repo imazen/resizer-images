@@ -27,6 +27,7 @@ ImageResizer.Plugins.S3Reader2
 ImageResizer.Plugins.SeamCarving
 ImageResizer.Plugins.SimpleFilters
 ImageResizer.Plugins.SqlReader
+ImageResizer.Plugins.TinyCache
 ImageResizer.Plugins.Watermark
 ImageResizer.Plugins.WebP
 ImageResizer.Plugins.WhitespaceTrimmer
