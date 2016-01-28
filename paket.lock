@@ -1,5 +1,5 @@
 NUGET
-  remote: https://nuget.org/api/v2
+  remote: https://www.nuget.org/api/v2
   specs:
     AForge (2.2.5)
     AForge.Imaging (2.2.5)
@@ -8,51 +8,51 @@ NUGET
     AForge.Math (2.2.5)
       AForge (>= 2.2.5)
     Appfail.WebForms (1.1.0)
-    AWSSDK.Core (3.1.3.5)
-      Microsoft.Net.Http (>= 2.2.29) - framework: portable-net45+win+wpa81+wp80+MonoAndroid10+xamarinios10+MonoTouch10
-      PCLCrypto (>= 1.0.2.15130) - framework: portable-net45+win+wpa81+wp80+MonoAndroid10+xamarinios10+MonoTouch10
-      PCLStorage (>= 1.0.2) - framework: portable-net45+win+wpa81+wp80+MonoAndroid10+xamarinios10+MonoTouch10
-    AWSSDK.S3 (3.1.3.5)
-      AWSSDK.Core (>= 3.1.3.3 < 3.2)
+    AWSSDK.Core (3.1.4.3)
+      Microsoft.Net.Http (>= 2.2.29) - framework: portable-net45+win8+wp8+wpa81
+      PCLCrypto (>= 1.0.2.15130) - framework: portable-net45+win8+wp8+wpa81
+      PCLStorage (>= 1.0.2) - framework: portable-net45+win8+wp8+wpa81
+    AWSSDK.S3 (3.1.3.10)
+      AWSSDK.Core (>= 3.1.4.3 < 3.2.0)
     DotNetZip.Reduced (1.9.1.8)
     Imazen.WebP (9.0.1)
-    Microsoft.Azure.KeyVault.Core (1.0.0) - framework: wpv8.0, >= net40
-    Microsoft.Bcl (1.1.10) - framework: portable-net45+win+wpa81+wp80+MonoAndroid10+xamarinios10+MonoTouch10
+    Microsoft.Azure.KeyVault.Core (1.0.0) - framework: >= net40, wpv8.0
+    Microsoft.Bcl (1.1.10) - framework: portable-net45+win8+wp8+wpa81
       Microsoft.Bcl.Build (>= 1.0.14)
-    Microsoft.Bcl.Async (1.0.168) - framework: portable-net45+win+wpa81+wp80+MonoAndroid10+xamarinios10+MonoTouch10
+    Microsoft.Bcl.Async (1.0.168) - framework: portable-net45+win8+wp8+wpa81
       Microsoft.Bcl (>= 1.1.8)
-    Microsoft.Bcl.Build (1.0.21) - import_targets: false, framework: portable-net45+win+wpa81+wp80+MonoAndroid10+xamarinios10+MonoTouch10
-    Microsoft.Data.Edm (5.6.4) - framework: winv4.5, wpv8.1, wpv8.0, >= net40
-    Microsoft.Data.OData (5.6.4) - framework: winv4.5, wpv8.1, wpv8.0, >= net40
-      Microsoft.Data.Edm (5.6.4)
-      System.Spatial (5.6.4)
-    Microsoft.Data.Services.Client (5.6.4) - framework: >= net40
-      Microsoft.Data.OData (5.6.4)
-    Microsoft.Net.Http (2.2.29) - framework: portable-net45+win+wpa81+wp80+MonoAndroid10+xamarinios10+MonoTouch10
+    Microsoft.Bcl.Build (1.0.21) - import_targets: false, framework: portable-net45+win8+wp8+wpa81
+    Microsoft.Data.Edm (5.7.0) - framework: >= net40, winv4.5, wpv8.1, wpv8.0
+    Microsoft.Data.OData (5.7.0) - framework: >= net40, winv4.5, wpv8.1, wpv8.0
+      Microsoft.Data.Edm (5.7.0)
+      System.Spatial (5.7.0)
+    Microsoft.Data.Services.Client (5.7.0) - framework: >= net40
+      Microsoft.Data.OData (5.7.0)
+    Microsoft.Net.Http (2.2.29) - framework: portable-net45+win8+wp8+wpa81
       Microsoft.Bcl (>= 1.1.10)
       Microsoft.Bcl.Build (>= 1.0.14)
-    Microsoft.WindowsAzure.ConfigurationManager (3.1.0)
-    mongocsharpdriver (2.1.1)
-      MongoDB.Bson (>= 2.1.1)
-      MongoDB.Driver (>= 2.1.1)
-      MongoDB.Driver.Core (>= 2.1.1)
-    MongoDB.Bson (2.1.1)
-    MongoDB.Driver (2.1.1)
-      MongoDB.Bson (>= 2.1.1)
-      MongoDB.Driver.Core (>= 2.1.1)
-    MongoDB.Driver.Core (2.1.1)
-      MongoDB.Bson (>= 2.1.1)
+    Microsoft.WindowsAzure.ConfigurationManager (3.2.0)
+    mongocsharpdriver (2.2.2)
+      MongoDB.Bson (>= 2.2.2)
+      MongoDB.Driver (>= 2.2.2)
+      MongoDB.Driver.Core (>= 2.2.2)
+    MongoDB.Bson (2.2.2)
+    MongoDB.Driver (2.2.2)
+      MongoDB.Bson (>= 2.2.2)
+      MongoDB.Driver.Core (>= 2.2.2)
+    MongoDB.Driver.Core (2.2.2)
+      MongoDB.Bson (>= 2.2.2)
     Mono.Security (3.2.3)
-    Newtonsoft.Json (7.0.1) - framework: winv4.5, wpv8.1, wpv8.0, >= net40
-    NLog (4.2.0)
-    OpenCvSharp-WithoutDll (2.4.10.20150820)
-    PCLCrypto (1.0.86) - framework: portable-net45+win+wpa81+wp80+MonoAndroid10+xamarinios10+MonoTouch10
+    Newtonsoft.Json (8.0.2)
+    NLog (4.2.3)
+    OpenCvSharp-WithoutDll (2.4.10.20151220)
+    PCLCrypto (1.0.86) - framework: portable-net45+win8+wp8+wpa81
       Mono.Security (>= 3.2.3.0 < 4.0) - framework: >= net40
       Validation (>= 2.0.6 < 3.0)
-    PCLStorage (1.0.2) - framework: portable-net45+win+wpa81+wp80+MonoAndroid10+xamarinios10+MonoTouch10
+    PCLStorage (1.0.2) - framework: portable-net45+win8+wp8+wpa81
       Microsoft.Bcl (>= 1.1.6)
       Microsoft.Bcl.Async (>= 1.0.165)
-    PdfiumViewer (2.7.0)
+    PdfiumViewer (2.8.0)
     System.Collections (4.0.10) - framework: dnxcore50
       System.Diagnostics.Debug (>= 4.0.0) - framework: dnxcore50
       System.Resources.ResourceManager (>= 4.0.0) - framework: dnxcore50
@@ -60,11 +60,11 @@ NUGET
       System.Runtime (>= 4.0.20) - framework: dnxcore50
       System.Runtime.Extensions (>= 4.0.0) - framework: dnxcore50
       System.Threading (>= 4.0.0) - framework: dnxcore50
-    System.Diagnostics.Debug (4.0.10) - framework: dnxcore50
+    System.Diagnostics.Debug (4.0.10)
       System.Runtime (>= 4.0.0) - framework: dnxcore50
     System.Diagnostics.Tools (4.0.0)
       System.Runtime (>= 4.0.0) - framework: dnxcore50
-    System.Globalization (4.0.10) - framework: dnxcore50
+    System.Globalization (4.0.10)
       System.Runtime (>= 4.0.0) - framework: dnxcore50
     System.IO (4.0.10) - framework: dnxcore50
       System.Globalization (>= 4.0.0) - framework: dnxcore50
@@ -81,24 +81,24 @@ NUGET
       System.Runtime (>= 4.0.20) - framework: dnxcore50
       System.Runtime.Extensions (>= 4.0.10) - framework: dnxcore50
     System.Private.Uri (4.0.0) - framework: dnxcore50
-    System.Reflection (4.0.10) - framework: dnxcore50
+    System.Reflection (4.0.10)
       System.IO (>= 4.0.0) - framework: dnxcore50
       System.Reflection.Primitives (>= 4.0.0) - framework: dnxcore50
       System.Runtime (>= 4.0.20) - framework: dnxcore50
     System.Reflection.Primitives (4.0.0) - framework: dnxcore50
       System.Runtime (>= 4.0.0) - framework: dnxcore50
       System.Threading (>= 4.0.0) - framework: dnxcore50
-    System.Resources.ResourceManager (4.0.0) - framework: dnxcore50
+    System.Resources.ResourceManager (4.0.0)
       System.Globalization (>= 4.0.0) - framework: dnxcore50
       System.Reflection (>= 4.0.0) - framework: dnxcore50
       System.Reflection (>= 4.0.10) - framework: dnxcore50
       System.Runtime (>= 4.0.0) - framework: dnxcore50
       System.Runtime (>= 4.0.20) - framework: dnxcore50
-    System.Runtime (4.0.20) - framework: dnxcore50
+    System.Runtime (4.0.20)
       System.Private.Uri (>= 4.0.0) - framework: dnxcore50
     System.Runtime.Extensions (4.0.10) - framework: dnxcore50
       System.Runtime (>= 4.0.20) - framework: dnxcore50
-    System.Spatial (5.6.4) - framework: winv4.5, wpv8.1, wpv8.0, >= net40
+    System.Spatial (5.7.0) - framework: >= net40, winv4.5, wpv8.1, wpv8.0
     System.Text.Encoding (4.0.10) - framework: dnxcore50
       System.Runtime (>= 4.0.0) - framework: dnxcore50
     System.Text.Encoding.Extensions (4.0.10) - framework: dnxcore50
@@ -107,9 +107,9 @@ NUGET
     System.Threading (4.0.10) - framework: dnxcore50
       System.Runtime (>= 4.0.0) - framework: dnxcore50
       System.Threading.Tasks (>= 4.0.0) - framework: dnxcore50
-    System.Threading.Tasks (4.0.10) - framework: dnxcore50
+    System.Threading.Tasks (4.0.10)
       System.Runtime (>= 4.0.0) - framework: dnxcore50
-    Validation (2.2.8) - framework: portable-net45+win+wpa81+wp80+MonoAndroid10+xamarinios10+MonoTouch10
+    Validation (2.2.8) - framework: portable-net45+win8+wp8+wpa81
       System.Diagnostics.Debug (>= 4.0.0) - framework: dnxcore50
       System.Diagnostics.Tools (>= 4.0.0) - framework: dnxcore50
       System.Globalization (>= 4.0.0) - framework: dnxcore50
@@ -118,107 +118,107 @@ NUGET
       System.Resources.ResourceManager (>= 4.0.0) - framework: dnxcore50
       System.Runtime (>= 4.0.0) - framework: dnxcore50
       System.Threading.Tasks (>= 4.0.0) - framework: dnxcore50
-    WindowsAzure.Storage (6.1.0)
-      Microsoft.Azure.KeyVault.Core (>= 1.0.0) - framework: wpv8.0, >= net40
-      Microsoft.Data.OData (>= 5.6.4) - framework: winv4.5, wpv8.1, wpv8.0, >= net40
+    WindowsAzure.Storage (6.2.0)
+      Microsoft.Azure.KeyVault.Core (>= 1.0.0) - framework: >= net40, wpv8.0
+      Microsoft.Data.OData (>= 5.6.4) - framework: >= net40, winv4.5, wpv8.1, wpv8.0
       Microsoft.Data.Services.Client (>= 5.6.4) - framework: >= net40
-      Newtonsoft.Json (>= 6.0.8) - framework: winv4.5, wpv8.1, wpv8.0, >= net40
+      Newtonsoft.Json (>= 6.0.8) - framework: >= net40, winv4.5, wpv8.1, wpv8.0
   remote: https://www.myget.org/F/imazen-nightlies
   specs:
-    ImageResizer (4.0.0-prerelease0935)
-    ImageResizer.Mvc (4.0.0-prerelease0935)
-      ImageResizer (>= 4.0.0-prerelease0935)
-    ImageResizer.MvcWebConfig (4.0.0-prerelease0935)
-      ImageResizer (>= 4.0.0-prerelease0935)
-      ImageResizer.WebConfig (>= 4.0.0-prerelease0935)
-    ImageResizer.Plugins.AdvancedFilters (4.0.0-prerelease0935)
+    ImageResizer (4.0.0-prerelease0939)
+    ImageResizer.Mvc (4.0.0-prerelease0939)
+      ImageResizer (>= 4.0.0-prerelease0939)
+    ImageResizer.MvcWebConfig (4.0.0-prerelease0939)
+      ImageResizer (>= 4.0.0-prerelease0939)
+      ImageResizer.WebConfig (>= 4.0.0-prerelease0939)
+    ImageResizer.Plugins.AdvancedFilters (4.0.0-prerelease0939)
       AForge (>= 2.2.5)
       AForge.Imaging (>= 2.2.5)
       AForge.Math (>= 2.2.5)
-      ImageResizer (>= 4.0.0-prerelease0935)
-    ImageResizer.Plugins.AnimatedGifs (4.0.0-prerelease0935)
-      ImageResizer (>= 4.0.0-prerelease0935)
-    ImageResizer.Plugins.AzureReader2 (4.0.0-prerelease0935)
-      ImageResizer (>= 4.0.0-prerelease0935)
-      ImageResizer.Storage (>= 4.0.0-prerelease0935)
+      ImageResizer (>= 4.0.0-prerelease0939)
+    ImageResizer.Plugins.AnimatedGifs (4.0.0-prerelease0939)
+      ImageResizer (>= 4.0.0-prerelease0939)
+    ImageResizer.Plugins.AzureReader2 (4.0.0-prerelease0939)
+      ImageResizer (>= 4.0.0-prerelease0939)
+      ImageResizer.Storage (>= 4.0.0-prerelease0939)
       Microsoft.WindowsAzure.ConfigurationManager (>= 3.1.0 < 4.0)
       Newtonsoft.Json (>= 7.0.1)
       WindowsAzure.Storage (>= 6.0)
-    ImageResizer.Plugins.BatchZipper (4.0.0-prerelease0935)
+    ImageResizer.Plugins.BatchZipper (4.0.0-prerelease0939)
       DotNetZip.Reduced (>= 1.9.1.8)
-      ImageResizer (>= 4.0.0-prerelease0935)
-    ImageResizer.Plugins.CloudFront (4.0.0-prerelease0935)
-      ImageResizer (>= 4.0.0-prerelease0935)
-    ImageResizer.Plugins.CopyMetadata (4.0.0-prerelease0935)
-      ImageResizer (>= 4.0.0-prerelease0935)
-    ImageResizer.Plugins.DiagnosticJson (4.0.0-prerelease0935)
-      ImageResizer (>= 4.0.0-prerelease0935)
+      ImageResizer (>= 4.0.0-prerelease0939)
+    ImageResizer.Plugins.CloudFront (4.0.0-prerelease0939)
+      ImageResizer (>= 4.0.0-prerelease0939)
+    ImageResizer.Plugins.CopyMetadata (4.0.0-prerelease0939)
+      ImageResizer (>= 4.0.0-prerelease0939)
+    ImageResizer.Plugins.DiagnosticJson (4.0.0-prerelease0939)
+      ImageResizer (>= 4.0.0-prerelease0939)
       Newtonsoft.Json (>= 7.0.1)
-    ImageResizer.Plugins.DiskCache (4.0.0-prerelease0935)
-      ImageResizer (>= 4.0.0-prerelease0935)
-    ImageResizer.Plugins.Faces (4.0.0-prerelease0935)
-      ImageResizer (>= 4.0.0-prerelease0935)
+    ImageResizer.Plugins.DiskCache (4.0.0-prerelease0939)
+      ImageResizer (>= 4.0.0-prerelease0939)
+    ImageResizer.Plugins.Faces (4.0.0-prerelease0939)
+      ImageResizer (>= 4.0.0-prerelease0939)
       Newtonsoft.Json (>= 7.0.1)
       OpenCvSharp-WithoutDll (>= 2.4.10.20150820)
-    ImageResizer.Plugins.FastScaling.x86 (4.0.0-prerelease0935)
-      ImageResizer (>= 4.0.0-prerelease0935)
-    ImageResizer.Plugins.FFmpeg (4.0.0-prerelease0935)
-      ImageResizer (>= 4.0.0-prerelease0935)
-    ImageResizer.Plugins.FreeImage (4.0.0-prerelease0935)
-      ImageResizer (>= 4.0.0-prerelease0935)
-    ImageResizer.Plugins.Logging (4.0.0-prerelease0935)
-      ImageResizer (>= 4.0.0-prerelease0935)
+    ImageResizer.Plugins.FastScaling.x86 (4.0.0-prerelease0939)
+      ImageResizer (>= 4.0.0-prerelease0939)
+    ImageResizer.Plugins.FFmpeg (4.0.0-prerelease0939)
+      ImageResizer (>= 4.0.0-prerelease0939)
+    ImageResizer.Plugins.FreeImage (4.0.0-prerelease0939)
+      ImageResizer (>= 4.0.0-prerelease0939)
+    ImageResizer.Plugins.Logging (4.0.0-prerelease0939)
+      ImageResizer (>= 4.0.0-prerelease0939)
       NLog
-    ImageResizer.Plugins.MongoReader (4.0.0-prerelease0935)
-      ImageResizer (>= 4.0.0-prerelease0935)
-      ImageResizer.Storage (>= 4.0.0-prerelease0935)
+    ImageResizer.Plugins.MongoReader (4.0.0-prerelease0939)
+      ImageResizer (>= 4.0.0-prerelease0939)
+      ImageResizer.Storage (>= 4.0.0-prerelease0939)
       mongocsharpdriver (>= 2.1.0)
-    ImageResizer.Plugins.PdfiumRenderer (4.0.0-prerelease0935)
-      ImageResizer (>= 4.0.0-prerelease0935)
+    ImageResizer.Plugins.PdfiumRenderer (4.0.0-prerelease0939)
+      ImageResizer (>= 4.0.0-prerelease0939)
       PdfiumViewer (>= 2.7.0 < 3.0)
-    ImageResizer.Plugins.PdfRenderer (4.0.0-prerelease0935)
-      ImageResizer (>= 4.0.0-prerelease0935)
-    ImageResizer.Plugins.PrettyGifs (4.0.0-prerelease0935)
-      ImageResizer (>= 4.0.0-prerelease0935)
-    ImageResizer.Plugins.PsdComposer (4.0.0-prerelease0935)
-      ImageResizer (>= 4.0.0-prerelease0935)
-    ImageResizer.Plugins.PsdReader (4.0.0-prerelease0935)
-      ImageResizer (>= 4.0.0-prerelease0935)
-    ImageResizer.Plugins.RedEye (4.0.0-prerelease0935)
+    ImageResizer.Plugins.PdfRenderer (4.0.0-prerelease0939)
+      ImageResizer (>= 4.0.0-prerelease0939)
+    ImageResizer.Plugins.PrettyGifs (4.0.0-prerelease0939)
+      ImageResizer (>= 4.0.0-prerelease0939)
+    ImageResizer.Plugins.PsdComposer (4.0.0-prerelease0939)
+      ImageResizer (>= 4.0.0-prerelease0939)
+    ImageResizer.Plugins.PsdReader (4.0.0-prerelease0939)
+      ImageResizer (>= 4.0.0-prerelease0939)
+    ImageResizer.Plugins.RedEye (4.0.0-prerelease0939)
       AForge (>= 2.2.5)
       AForge.Imaging (>= 2.2.5)
       AForge.Math (>= 2.2.5)
-      ImageResizer (>= 4.0.0-prerelease0935)
-      ImageResizer.Plugins.Faces (>= 4.0.0-prerelease0935)
+      ImageResizer (>= 4.0.0-prerelease0939)
+      ImageResizer.Plugins.Faces (>= 4.0.0-prerelease0939)
       OpenCvSharp-WithoutDll (>= 2.4.10.20150820)
-    ImageResizer.Plugins.RemoteReader (4.0.0-prerelease0935)
-      ImageResizer (>= 4.0.0-prerelease0935)
-    ImageResizer.Plugins.S3Reader2 (4.0.0-prerelease0935)
+    ImageResizer.Plugins.RemoteReader (4.0.0-prerelease0939)
+      ImageResizer (>= 4.0.0-prerelease0939)
+    ImageResizer.Plugins.S3Reader2 (4.0.0-prerelease0939)
       AWSSDK.S3 (>= 3.1.3 < 4.0)
-      ImageResizer (>= 4.0.0-prerelease0935)
-      ImageResizer.Storage (>= 4.0.0-prerelease0935)
-    ImageResizer.Plugins.SeamCarving (4.0.0-prerelease0935)
-      ImageResizer (>= 4.0.0-prerelease0935)
-    ImageResizer.Plugins.SimpleFilters (4.0.0-prerelease0935)
-      ImageResizer (>= 4.0.0-prerelease0935)
-    ImageResizer.Plugins.SqlReader (4.0.0-prerelease0935)
-      ImageResizer (>= 4.0.0-prerelease0935)
-      ImageResizer.Storage (>= 4.0.0-prerelease0935)
-    ImageResizer.Plugins.TinyCache (4.0.0-prerelease0935)
-      ImageResizer (>= 4.0.0-prerelease0935)
-    ImageResizer.Plugins.Watermark (4.0.0-prerelease0935)
-      ImageResizer (>= 4.0.0-prerelease0935)
-    ImageResizer.Plugins.WebP (4.0.0-prerelease0935)
-      ImageResizer (>= 4.0.0-prerelease0935)
+      ImageResizer (>= 4.0.0-prerelease0939)
+      ImageResizer.Storage (>= 4.0.0-prerelease0939)
+    ImageResizer.Plugins.SeamCarving (4.0.0-prerelease0939)
+      ImageResizer (>= 4.0.0-prerelease0939)
+    ImageResizer.Plugins.SimpleFilters (4.0.0-prerelease0939)
+      ImageResizer (>= 4.0.0-prerelease0939)
+    ImageResizer.Plugins.SqlReader (4.0.0-prerelease0939)
+      ImageResizer (>= 4.0.0-prerelease0939)
+      ImageResizer.Storage (>= 4.0.0-prerelease0939)
+    ImageResizer.Plugins.TinyCache (4.0.0-prerelease0939)
+      ImageResizer (>= 4.0.0-prerelease0939)
+    ImageResizer.Plugins.Watermark (4.0.0-prerelease0939)
+      ImageResizer (>= 4.0.0-prerelease0939)
+    ImageResizer.Plugins.WebP (4.0.0-prerelease0939)
+      ImageResizer (>= 4.0.0-prerelease0939)
       Imazen.WebP (>= 9.0.1)
-    ImageResizer.Plugins.WhitespaceTrimmer (4.0.0-prerelease0935)
+    ImageResizer.Plugins.WhitespaceTrimmer (4.0.0-prerelease0939)
       AForge.Imaging (>= 2.2.5)
-      ImageResizer (>= 4.0.0-prerelease0935)
-    ImageResizer.Plugins.Wic (4.0.0-prerelease0935)
-      ImageResizer (>= 4.0.0-prerelease0935)
-    ImageResizer.Storage (4.0.0-prerelease0935)
-      ImageResizer (>= 4.0.0-prerelease0935)
-    ImageResizer.WebConfig (4.0.0-prerelease0935)
-      ImageResizer (>= 4.0.0-prerelease0935)
-    ImageResizer.WebConfigAsync (4.0.0-prerelease0935)
-      ImageResizer (>= 4.0.0-prerelease0935)
+      ImageResizer (>= 4.0.0-prerelease0939)
+    ImageResizer.Plugins.Wic (4.0.0-prerelease0939)
+      ImageResizer (>= 4.0.0-prerelease0939)
+    ImageResizer.Storage (4.0.0-prerelease0939)
+      ImageResizer (>= 4.0.0-prerelease0939)
+    ImageResizer.WebConfig (4.0.0-prerelease0939)
+      ImageResizer (>= 4.0.0-prerelease0939)
+    ImageResizer.WebConfigAsync (4.0.0-prerelease0939)
+      ImageResizer (>= 4.0.0-prerelease0939)
