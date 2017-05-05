@@ -24,6 +24,7 @@ namespace Imazen
         
         if (e.VirtualPath.StartsWith("/rw/", StringComparison.OrdinalIgnoreCase)) e.VirtualPath = "/s3/resizer-web" + e.VirtualPath.Substring(3);
         if (e.VirtualPath.StartsWith("/ri/", StringComparison.OrdinalIgnoreCase)) e.VirtualPath = "/s3/resizer-images" + e.VirtualPath.Substring(3);
+        if (e.VirtualPath.StartsWith("/un/", StringComparison.OrdinalIgnoreCase)) e.VirtualPath = "/remote/images.unsplash.com" + e.VirtualPath.Substring(3);
         
     }
     
