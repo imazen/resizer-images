@@ -1,5 +1,6 @@
 source https://nuget.org/api/v2
 source https://www.myget.org/F/imazen-nightlies
+redirects on
 
 nuget Appfail.WebForms
 nuget ImageResizer.Mvc 4.1.3-prerelease0996
