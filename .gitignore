@@ -158,3 +158,5 @@ $RECYCLE.BIN/
 
 # full copy of paket
 .paket/paket.exe
+imagecache/
+.vs/
