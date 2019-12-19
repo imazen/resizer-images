@@ -1353,6 +1353,26 @@
     </When>
   </Choose>
   <Choose>
+    <When Condition="$(TargetFrameworkIdentifier) == '.NETFramework' And ($(TargetFrameworkVersion) == 'v4.5.2' Or $(TargetFrameworkVersion) == 'v4.5.3' Or $(TargetFrameworkVersion) == 'v4.6' Or $(TargetFrameworkVersion) == 'v4.6.1' Or $(TargetFrameworkVersion) == 'v4.6.2' Or $(TargetFrameworkVersion) == 'v4.6.3' Or $(TargetFrameworkVersion) == 'v4.7' Or $(TargetFrameworkVersion) == 'v4.7.1' Or $(TargetFrameworkVersion) == 'v4.7.2' Or $(TargetFrameworkVersion) == 'v4.8')">
+      <ItemGroup>
+        <Reference Include="MongoDB.Libmongocrypt">
+          <HintPath>packages\MongoDB.Libmongocrypt\lib\net452\MongoDB.Libmongocrypt.dll</HintPath>
+          <Private>True</Private>
+          <Paket>True</Paket>
+        </Reference>
+      </ItemGroup>
+    </When>
+    <When Condition="($(TargetFrameworkIdentifier) == 'MonoAndroid' And ($(TargetFrameworkVersion) == 'v7.0' Or $(TargetFrameworkVersion) == 'v7.1' Or $(TargetFrameworkVersion) == 'v8.0' Or $(TargetFrameworkVersion) == 'v8.1' Or $(TargetFrameworkVersion) == 'v9.0')) Or ($(TargetFrameworkIdentifier) == 'MonoTouch') Or ($(TargetFrameworkIdentifier) == '.NETCoreApp' And ($(TargetFrameworkVersion) == 'v1.0' Or $(TargetFrameworkVersion) == 'v1.1' Or $(TargetFrameworkVersion) == 'v2.0' Or $(TargetFrameworkVersion) == 'v2.1' Or $(TargetFrameworkVersion) == 'v2.2' Or $(TargetFrameworkVersion) == 'v3.0' Or $(TargetFrameworkVersion) == 'v3.1')) Or ($(TargetFrameworkIdentifier) == '.NETStandard' And ($(TargetFrameworkVersion) == 'v1.5' Or $(TargetFrameworkVersion) == 'v1.6' Or $(TargetFrameworkVersion) == 'v2.0' Or $(TargetFrameworkVersion) == 'v2.1')) Or ($(TargetFrameworkIdentifier) == '.NETCore' And $(TargetFrameworkVersion) == 'v5.0') Or ($(TargetFrameworkIdentifier) == 'Xamarin.iOS') Or ($(TargetFrameworkIdentifier) == 'Xamarin.Mac') Or ($(TargetFrameworkIdentifier) == 'Xamarin.tvOS') Or ($(TargetFrameworkIdentifier) == 'Xamarin.watchOS')">
+      <ItemGroup>
+        <Reference Include="MongoDB.Libmongocrypt">
+          <HintPath>packages\MongoDB.Libmongocrypt\lib\netstandard1.5\MongoDB.Libmongocrypt.dll</HintPath>
+          <Private>True</Private>
+          <Paket>True</Paket>
+        </Reference>
+      </ItemGroup>
+    </When>
+  </Choose>
+  <Choose>
     <When Condition="$(TargetFrameworkIdentifier) == '.NETFramework' And ($(TargetFrameworkVersion) == 'v2.0' Or $(TargetFrameworkVersion) == 'v3.0')">
       <ItemGroup>
         <Reference Include="Newtonsoft.Json">
@@ -4526,6 +4546,7 @@
   </Choose>
   <Import Project="packages\Microsoft.Net.Native.Compiler\build\Microsoft.Net.Native.Compiler.targets" Condition="Exists('packages\Microsoft.Net.Native.Compiler\build\Microsoft.Net.Native.Compiler.targets')" Label="Paket" />
   <Import Project="packages\Microsoft.NETCore.UniversalWindowsPlatform\build\Microsoft.NetCore.UniversalWindowsPlatform.targets" Condition="Exists('packages\Microsoft.NETCore.UniversalWindowsPlatform\build\Microsoft.NetCore.UniversalWindowsPlatform.targets')" Label="Paket" />
+  <Import Project="packages\MongoDB.Libmongocrypt\build\MongoDB.Libmongocrypt.targets" Condition="Exists('packages\MongoDB.Libmongocrypt\build\MongoDB.Libmongocrypt.targets')" Label="Paket" />
   <Import Project="packages\NETStandard.Library\build\$(__paket__NETStandard_Library_targets).targets" Condition="Exists('packages\NETStandard.Library\build\$(__paket__NETStandard_Library_targets).targets')" Label="Paket" />
   <Import Project="packages\runtime.win10-arm.Microsoft.Net.Native.Compiler\build\runtime.win10-arm.Microsoft.Net.Native.Compiler.targets" Condition="Exists('packages\runtime.win10-arm.Microsoft.Net.Native.Compiler\build\runtime.win10-arm.Microsoft.Net.Native.Compiler.targets')" Label="Paket" />
   <Import Project="packages\runtime.win10-arm.Microsoft.Net.Native.SharedLibrary\build\runtime.win10-arm.Microsoft.Net.Native.SharedLibrary.targets" Condition="Exists('packages\runtime.win10-arm.Microsoft.Net.Native.SharedLibrary\build\runtime.win10-arm.Microsoft.Net.Native.SharedLibrary.targets')" Label="Paket" />
