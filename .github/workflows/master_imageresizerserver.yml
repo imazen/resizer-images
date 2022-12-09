@@ -26,7 +26,7 @@ jobs:
         run: nuget restore
 
       - name: Publish to folder
-        run: msbuild ResizerDemo.sln /nologo /verbosity:m /t:Build /t:pipelinePreDeployCopyAllFilesToOneFolder /p:_PackageTempDir="\published\"
+        run: msbuild ResizerDemo.sln /nologo /verbosity:m /t:Build /t:pipelinePreDeployCopyAllFilesToOneFolder /p:_PackageTempDir="\published\" /p:Configuration=Release /p:Platform=x64
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v2
